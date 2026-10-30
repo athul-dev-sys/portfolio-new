@@ -1,4 +1,5 @@
 import FolderTabPortfolioTemplate from './components/ui/folder-tab-portfolio-template'
+import athulPhoto from './assets/athul.jpg'
 
 export default function App() {
   return (
@@ -22,7 +23,7 @@ export default function App() {
       defaultTheme="dark"
       timeZone="Asia/Kolkata"
       email="athulsunilkumar6@gmail.com"
-      photo="/athul.jpg"
+      photo={athulPhoto}
       colors={{
         blue: "#3b82f6",
         green: "#10b981",
@@ -253,7 +254,7 @@ export default function App() {
         {
           label: "Resume (PDF)",
           value: "Download Athul's Resume",
-          href: "/Athul_Sunil_Kumar_Resume.pdf",
+          href: "./Athul_Sunil_Kumar_Resume.pdf",
         },
         {
           label: "GitHub",

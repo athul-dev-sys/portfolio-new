@@ -10,15 +10,15 @@ export default function App() {
       years="2024–2026"
       role="Full Stack Software Engineer"
       disciplines={[
-        "Distributed Systems",
-        "Cloud & Microservices",
-        "Agentic AI & ML",
+        "Distributed Systems & Cloud",
+        "Agentic AI & LLMs",
+        "Full-Stack Platforms",
       ]}
       word="Portfolio"
       tag="#ATHUL"
       subtitle={["Systems ", "& Intelligence"]}
       notes={["High Throughput", "Low Latency", "Fault Tolerant"]}
-      blurb="Full Stack Software Engineer specializing in high-concurrency cloud architectures (AWS ECS, Kafka, Redis, PostgreSQL), scalable microservices, and production Agentic AI/ML systems. Founder of Tutora EdTech SaaS."
+      blurb="Full Stack Software Engineer specializing in high-concurrency cloud architectures (AWS ECS, Kafka, Redis, PostgreSQL), resilient microservices, and production Agentic AI/ML systems. Founder of Tutora EdTech SaaS."
       greeting="Hello, I'm"
       defaultTheme="dark"
       timeZone="Asia/Kolkata"
@@ -31,10 +31,10 @@ export default function App() {
         yellow: "#eab308",
       }}
       categories={[
-        { id: "distributed", label: "Distributed Systems", tone: "blue", kind: "brand" },
-        { id: "ai-ml", label: "Agentic AI & ML", tone: "green", kind: "render" },
-        { id: "saas", label: "Cloud & SaaS", tone: "orange", kind: "page" },
-        { id: "fullstack", label: "Full Stack Platforms", tone: "yellow", kind: "poster" },
+        { id: "distributed", label: "Distributed Systems & Security", tone: "blue", kind: "brand" },
+        { id: "ai-ml", label: "AI, ML & Language Models", tone: "green", kind: "render" },
+        { id: "saas", label: "Cloud & SaaS Products", tone: "orange", kind: "page" },
+        { id: "fullstack", label: "Full Stack & Mobile", tone: "yellow", kind: "poster" },
       ]}
       projects={[
         {
@@ -52,6 +52,34 @@ export default function App() {
           mark: "HASH62",
         },
         {
+          title: "DRONA-LOG — Tactical Military Resupply",
+          category: "distributed",
+          year: "2026",
+          summary: "Smart India Hackathon (SIH 2026) · Predictive logistics and terrain-aware mountain resupply for high-altitude military formations.",
+          role: "Lead Systems & Backend Engineer",
+          client: "SIH 2026 (Team Subterra Mesh)",
+          tools: ["Python 3.12", "FastAPI", "Google OR-Tools (SCIP)", "LightGBM", "React 19", "MapLibre GL", "Docker"],
+          body: [
+            "Built for Smart India Hackathon (Problem Statement SIH26251). Forecasts demand at forward operating bases and routes supplies over an elevation-penalised mountain network.",
+            "Allocates limited transport with mixed-integer optimization (Google OR-Tools SCIP), automatically re-plans when strategic passes close, and keeps field requisitions working when the backend is unreachable.",
+          ],
+          href: "https://github.com/athul-dev-sys/DRONA-LOG",
+          mark: "DRONA",
+        },
+        {
+          title: "GhostRange — Security Control Validation",
+          category: "distributed",
+          year: "2026",
+          summary: "Defensive security-control validation platform that safely simulates cloud identity compromises and verifies detection rules.",
+          role: "Security & Full Stack Engineer",
+          tools: ["TypeScript", "React", "Node.js", "NVIDIA Nemotron", "Nebius AI", "Cloud Telemetry"],
+          body: [
+            "Safely simulates cloud identity compromise attack chains and produces high-fidelity synthetic telemetry.",
+            "Evaluates detection rules against telemetry with deterministic logic, pinpoints security blind spots, and generates AI explanations using NVIDIA Nemotron via Nebius Token Factory.",
+          ],
+          mark: "GHOST",
+        },
+        {
           title: "Churn Guard — Customer Churn Platform",
           category: "ai-ml",
           year: "2025",
@@ -64,6 +92,34 @@ export default function App() {
           ],
           href: "http://churn-platform-alb-913716606.ap-south-2.elb.amazonaws.com/",
           mark: "CHURN",
+        },
+        {
+          title: "Malayalam SLM — Small Language Model",
+          category: "ai-ml",
+          year: "2025",
+          summary: "Base causal decoder-only transformer language model engineered specifically for Malayalam with native-fertility subword tokenization.",
+          role: "ML Researcher & Lead Developer",
+          tools: ["PyTorch", "Hugging Face", "Transformers", "Tokenizers", "Python"],
+          body: [
+            "Engineered a native Malayalam language model with a custom subword tokenizer tailored for low fertility across agglutinative Dravidian morpho-syntax.",
+            "Designed causal decoder-only transformer architecture with dialect adaptation infrastructure across an 8-stage engineering methodology.",
+          ],
+          href: "https://github.com/athul-dev-sys/malayalam-slm",
+          mark: "ML-SLM",
+        },
+        {
+          title: "IntentHire — AI Recruitment Platform",
+          category: "ai-ml",
+          year: "2025",
+          summary: "AI-powered hiring workflow platform for automated resume parsing, candidate scoring, and semantic ranking.",
+          role: "Full Stack & AI Engineer",
+          tools: ["Next.js", "FastAPI", "Google Gemini", "Pinecone Vector DB", "LangChain"],
+          body: [
+            "Automated parsing and contextual ranking of candidate resumes against complex job requirement specifications.",
+            "Utilized Google Gemini and Pinecone vector database embeddings to deliver semantic match scores, eliminating manual keyword bias.",
+          ],
+          href: "https://github.com/athul-dev-sys/IntentHire",
+          mark: "INTENT",
         },
         {
           title: "DalalSight — Stock Trend Forecasting",
@@ -80,6 +136,20 @@ export default function App() {
           mark: "DALAL",
         },
         {
+          title: "Markowitz Portfolio Optimizer",
+          category: "ai-ml",
+          year: "2024",
+          summary: "Modern Portfolio Theory (MPT) quantitative engine with Sharpe ratio maximization and Monte Carlo frontier simulation.",
+          role: "Quantitative Developer",
+          tools: ["Python", "Flask", "SciPy Optimize", "NumPy", "Pandas", "React"],
+          body: [
+            "Implemented Markowitz Efficient Frontier mathematical models to optimize asset weights across risk-adjusted return targets.",
+            "Runs Monte Carlo simulations and quadratic constrained optimization using SciPy to visualize optimal capital allocation curves.",
+          ],
+          href: "https://github.com/athul-dev-sys/Markowitz-portfolio-optimizer",
+          mark: "MPT-OPT",
+        },
+        {
           title: "Tutora — EdTech SaaS Platform",
           category: "saas",
           year: "2026",
@@ -93,6 +163,20 @@ export default function App() {
           ],
           href: "https://tutora.org.in",
           mark: "TUTOR",
+        },
+        {
+          title: "SoberCircle — Recovery Companion",
+          category: "fullstack",
+          year: "2025",
+          summary: "Cross-platform mobile addiction recovery application with sobriety milestone tracking and real-time community support.",
+          role: "Mobile App Developer",
+          tools: ["React Native", "Expo SDK 54", "Supabase", "PostgreSQL Auth", "TypeScript"],
+          body: [
+            "Built a full-stack cross-platform sobriety companion with Expo SDK 54 and React Native 0.81.",
+            "Engineered Supabase real-time database subscriptions, milestone badges, daily check-ins, and peer accountability circles.",
+          ],
+          href: "https://github.com/athul-dev-sys/HACK-A-ADDICT",
+          mark: "SOBER",
         },
         {
           title: "St. Mary's Cathedral Records Archive",
@@ -189,7 +273,7 @@ export default function App() {
         },
         {
           title: "Featured Engineering",
-          points: ["Distributed URL Shortener", "Churn Guard AI", "Tutora SaaS", "DalalSight"],
+          points: ["Distributed URL Shortener", "DRONA-LOG (SIH 2026)", "GhostRange", "Churn Guard", "Malayalam SLM", "Tutora SaaS"],
           target: "work",
         },
         {

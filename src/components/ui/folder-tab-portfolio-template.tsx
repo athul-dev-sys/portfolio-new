@@ -102,162 +102,53 @@ export interface FolderTabPortfolioTemplateProps {
 
 // #region content
 const DEFAULT_CATEGORIES: FolderCategory[] = [
-  { id: "others", label: "Others", local: "其他作品", tone: "orange", kind: "brand" },
-  { id: "render", label: "Render", local: "渲染海報", tone: "green", kind: "render" },
-  { id: "sale", label: "Sale page", local: "活動專題頁", tone: "yellow", kind: "sale" },
-  { id: "details", label: "Details", local: "詳情頁設計", tone: "green", kind: "page" },
-  { id: "posters", label: "Posters", local: "運營海報", tone: "blue", kind: "poster" },
+  { id: "distributed", label: "Distributed Systems & Security", local: "DISTRIBUTED", tone: "blue", kind: "brand" },
+  { id: "ai-ml", label: "AI, ML & Language Models", local: "AGENTIC AI", tone: "green", kind: "render" },
+  { id: "saas", label: "Cloud & SaaS Products", local: "CLOUD SAAS", tone: "orange", kind: "page" },
+  { id: "fullstack", label: "Full Stack & Mobile", local: "FULL STACK", tone: "yellow", kind: "poster" },
 ]
 
 const DEFAULT_PROJECTS: FolderProject[] = [
   {
-    title: "Cloudmilk yogurt details page",
-    local: "雲朵酸奶詳情頁",
-    category: "details",
-    year: "2026",
-    client: "Cloudmilk",
-    role: "Lead visual",
-    tools: ["Figma", "Photoshop", "C4D"],
-    mark: "MILK",
-    summary: "A twelve-screen product page that sells texture before it sells price.",
+    title: "Distributed URL Shortener",
+    local: "SYSTEM DESIGN",
+    category: "distributed",
+    year: "2025",
+    role: "System Architect",
+    tools: ["NestJS", "Next.js", "PostgreSQL", "Redis", "Nginx"],
+    mark: "HASH62",
+    summary: "Base62 hash-sharded PostgreSQL architecture sustaining 3,450 req/s @ 4.2ms p95 latency.",
     body: [
-      "The brief was a yogurt that tastes thicker than it looks. Every screen leads with a close crop of the spoon, then earns the scroll with one claim at a time.",
-      "Conversion on the page rose 18% over the old template in the first month, and the layout became the brand's default for new flavours.",
+      "Designed a horizontally scalable, fault-tolerant system with Base62 hash-sharded PostgreSQL and Redis cache-aside (99.4% hit rate).",
     ],
-  },
-  {
-    title: "Linen & Co. bedding details",
-    local: "亞麻寢具詳情頁",
-    category: "details",
-    year: "2025",
-    client: "Linen & Co.",
-    role: "Visual designer",
-    tools: ["Figma", "Lightroom"],
-    mark: "LINEN",
-    summary: "Slow, airy product storytelling for a bedding line washed in sea water.",
-    body: ["Soft greys, long margins and one sentence per screen. The page reads like a hotel room at 7am."],
-  },
-  {
-    title: "Spring tea festival posters",
-    local: "春茶節運營海報",
-    category: "posters",
-    year: "2026",
-    client: "Leafhouse",
-    role: "Poster series",
-    tools: ["Illustrator", "Procreate"],
-    mark: "TEA",
-    summary: "Six posters, one per tea, each built from a single leaf shape.",
-    body: ["A system rather than six one-offs: the leaf, the number and the date move; everything else is fixed, so the series reads at a glance on a crowded feed."],
-  },
-  {
-    title: "Night market operations poster",
-    local: "夜市運營海報",
-    category: "posters",
-    year: "2025",
-    client: "Harbour Night Market",
-    role: "Visual designer",
-    tools: ["Photoshop"],
-    mark: "NIGHT",
-    summary: "Neon type and hand-cut stalls for a weekend market by the pier.",
-  },
-  {
-    title: "Glass sneaker render",
-    local: "玻璃球鞋渲染",
-    category: "render",
-    year: "2026",
-    client: "Personal",
-    role: "3D & lighting",
-    tools: ["C4D", "Redshift"],
-    mark: "AIR",
-    summary: "A study in caustics: a sneaker made of frosted glass on a pastel stage.",
-    body: ["Three weeks of evenings, one material. The light does all of the selling."],
-  },
-  {
-    title: "Citrus soda key visual",
-    local: "柑橘汽水主視覺",
-    category: "render",
-    year: "2025",
-    client: "Pop Fizz",
-    role: "3D key visual",
-    tools: ["Blender", "Photoshop"],
-    mark: "FIZZ",
-    summary: "A floating can, three slices, and the exact orange of the summer label.",
-  },
-  {
-    title: "11.11 mega sale campaign",
-    local: "雙十一活動專題頁",
-    category: "sale",
-    year: "2025",
-    client: "Northwind Mall",
-    role: "Campaign lead",
-    tools: ["Figma", "After Effects"],
-    mark: "50%",
-    summary: "A campaign page, 40 banners and a countdown that stayed legible at 320px.",
-    body: [
-      "Sale pages fail by shouting everything. This one has a single loud number per screen and a quiet grid for the rest.",
-      "Shipped across app, web and in-store screens from one component sheet.",
-    ],
-  },
-  {
-    title: "618 summer deals landing",
-    local: "618 夏日特惠",
-    category: "sale",
-    year: "2026",
-    client: "Northwind Mall",
-    role: "Visual designer",
-    tools: ["Figma"],
-    mark: "618",
-    summary: "Sunlit yellows and sticker prices for the mid-year sale.",
-  },
-  {
-    title: "Palm Studio identity",
-    local: "棕櫚工作室品牌",
-    category: "others",
-    year: "2024",
-    client: "Palm Studio",
-    role: "Brand identity",
-    tools: ["Illustrator"],
-    mark: "PALM",
-    summary: "A logo system for a tiny print studio, built on a single leaf stroke.",
-  },
-  {
-    title: "Tide Notes zine",
-    local: "潮汐筆記小誌",
-    category: "others",
-    year: "2024",
-    client: "Self-published",
-    role: "Editorial design",
-    tools: ["InDesign"],
-    mark: "ZINE",
-    summary: "Forty risograph pages about the shoreline outside my old studio.",
   },
 ]
 
 const DEFAULT_HIGHLIGHTS: FolderHighlight[] = [
-  { label: "Visual designer", tone: "green", lines: ["Led visuals for 3 national campaigns", "Built a modular poster system", "E-commerce & brand, end to end"] },
-  { label: "4 years in practice", tone: "blue", lines: ["3 years at an in-house studio", "Turned briefs into page systems", "AIGC-assisted workflows"] },
-  { label: "Graphic creator", tone: "green", lines: ["15k followers on my design notes", "Type & layout tutorials", "Weekly poster practice"] },
+  { label: "Distributed & Cloud", tone: "blue", lines: ["AWS ECS Fargate, ALB & CloudWatch", "PostgreSQL Sharding & Redis Caching", "Docker, Microservices & CI/CD"] },
+  { label: "Agentic AI & ML", tone: "green", lines: ["SSE Streaming RAG (<400ms TTFT)", "4-Tool Agentic Root-Cause Diagnosis", "CatBoost 0.86 ROC-AUC & SLMs"] },
+  { label: "Full Stack Engineering", tone: "orange", lines: ["Next.js, React 19, TypeScript & Node.js", "Prisma ORM, PostgreSQL & MongoDB", "B.Tech CSE @ MACE (CGPA 8.34/10)"] },
 ]
 
 const DEFAULT_TIMELINE: FolderTimelineItem[] = [
-  { from: "2022.07", to: "2023.01", title: "Design intern", place: "Lumen Mall" },
-  { from: "2023.02", to: "2024.08", title: "Visual designer", place: "Northwind Retail" },
-  { from: "2024.09", to: "Now", title: "Senior visual designer", place: "Palm Studio" },
+  { from: "Feb 2026", to: "Present", title: "Founder & Full Stack Cloud Developer", place: "Tutora (EdTech SaaS) • tutora.org.in" },
+  { from: "Jun 2025", to: "Jul 2025", title: "Software Engineering / AI Intern", place: "Novolo.ai • Sentiment/CNN Models & AI Agents" },
+  { from: "Jun 2024", to: "Feb 2026", title: "Freelance Full Stack Developer", place: "Independent • St. Mary's Cathedral & Victory Tutors" },
 ]
 
 const DEFAULT_CHAPTERS: FolderChapter[] = [
-  { title: "Self-introduction", local: "自我介紹", points: ["Skills", "Work content", "Interests", "How I grew"], target: "about" },
-  { title: "Content output", local: "作品輸出", points: ["Details pages", "Posters", "3D renders", "Sale pages"], target: "work" },
-  { title: "Working process", local: "工作流程", points: ["Discover", "Define", "Design", "Deliver"], target: "process" },
-  { title: "Team evaluation", local: "團隊評價", points: ["Leads", "Peers", "Clients"], target: "words" },
-  { title: "Future planning", local: "未來規劃", points: ["What I'm looking for", "How to reach me"], target: "contact" },
+  { title: "Who I Am", local: "PROFILE", points: ["Background", "Core Strengths", "Education @ MACE"], target: "about" },
+  { title: "Featured Engineering", local: "SYSTEMS", points: ["Distributed URL Shortener", "DRONA-LOG (SIH 2026)", "GhostRange", "Churn Guard", "Malayalam SLM", "Tutora SaaS"], target: "work" },
+  { title: "Engineering Philosophy", local: "METHODOLOGY", points: ["High Throughput", "Fault Tolerance", "Zero Hallucination AI"], target: "process" },
+  { title: "Honors & Credentials", local: "HONORS", points: ["NASA Space Apps", "Amazon ML Challenge", "Wharton & IBM"], target: "words" },
+  { title: "Connect & Resume", local: "CONNECT", points: ["Resume PDF", "GitHub Repos", "LinkedIn Profile", "Direct Email"], target: "contact" },
 ]
 
 const DEFAULT_STEPS: FolderStep[] = [
-  { title: "Discover", local: "洞察", duration: "Day 1–2", body: "I start with the shelf, not the brief: what the customer sees next to us, what they already believe, and the one thing they need to hear first.", outputs: ["Shelf audit", "Reference board", "One-line promise"] },
-  { title: "Define", local: "定義", duration: "Day 3", body: "The promise becomes a page skeleton. One claim per screen, ranked, with the proof each claim needs. Nothing gets drawn until the order is agreed.", outputs: ["Screen list", "Claim ranking", "Shot list"] },
-  { title: "Design", local: "設計", duration: "Day 4–8", body: "Type and grid first, colour second, decoration last. I design the busiest screen first, because if that one works the quiet ones always do.", outputs: ["Key screens", "Type system", "3D / photo direction"] },
-  { title: "Deliver", local: "交付", duration: "Day 9–10", body: "Every size, every platform, from one component sheet. I hand over files a junior can update without calling me, and I check the live page myself.", outputs: ["Export kit", "Banner sizes", "Live QA"] },
+  { title: "System Architecture & Sharding", local: "ARCH", duration: "Phase 1", body: "Designing distributed architectures, Base62 hash-sharding, Redis cache-aside policies, and sliding-window rate limiting to eliminate single points of failure under concurrency.", outputs: ["RFC & Schemas", "Sharding Strategy", "Cache Policies"] },
+  { title: "Microservices & Cloud Deployment", local: "DEPLOY", duration: "Phase 2", body: "Developing decoupled microservices with TypeScript and Python. Containerizing with Docker and deploying to AWS ECS Fargate with ALB routing and GitHub Actions CI/CD.", outputs: ["Docker Images", "ECS Task Defs", "CI/CD Workflows"] },
+  { title: "Agentic AI & Grounded Reasoning", local: "REASONING", duration: "Phase 3", body: "Building multi-tool agentic workflows with second-pass verifiers, vector-embedding RAG pipelines, and SSE streaming for sub-400ms time-to-first-token.", outputs: ["RAG Pipelines", "Agent Tools", "Citation Verifiers"] },
+  { title: "Stress Testing & Reliability", local: "CHAOS", duration: "Phase 4", body: "Benchmarking p95 latencies under 3,450+ req/sec loads, simulating database outages to ensure 100% uptime in degraded mode, and verifying zero hallucinations.", outputs: ["Load Test Reports", "Failover Drills", "Monitoring Alerts"] },
 ]
 
 const DEFAULT_WORDS: FolderWord[] = [
@@ -396,39 +287,6 @@ function rng(seed: number): () => number {
 
 const r1 = (n: number) => Math.round(n * 10) / 10
 
-// A handwritten-looking signature: one continuous stroke of loops, humps and
-// descenders read off the letters of a name, finished with an underline swash.
-// It is a scrawl, not lettering, which is what most signatures are anyway.
-function signaturePath(text: string): { d: string; width: number } {
-  const letters = [...text.replace(/[^A-Za-z]/g, "")].slice(0, 12)
-  const rnd = rng(hashString(text || "signature"))
-  const base = 64
-  let x = 4
-  let d = "M0 " + (base + 6) + " C1 " + (base + 2) + " 2 " + base + " " + x + " " + base
-  const loop = (w: number, h: number) =>
-    " C" + r1(x + w * 0.95) + " " + r1(base - h * 0.5) + " " + r1(x + w * 0.9) + " " + r1(base - h) + " " + r1(x + w * 0.55) + " " + r1(base - h) +
-    " C" + r1(x + w * 0.15) + " " + r1(base - h) + " " + r1(x + w * 0.3) + " " + base + " " + r1(x + w) + " " + base
-  if (!letters.length) letters.push("s")
-  letters.forEach((ch, i) => {
-    const lower = ch.toLowerCase()
-    const cap = ch !== lower || i === 0
-    let w = 16 + rnd() * 10
-    if (cap) {
-      w += 12
-      d += loop(w, 52 + rnd() * 8)
-    } else if (/[bdfhklt]/.test(lower)) d += loop(w, 42 + rnd() * 6)
-    else if (/[gjpqyz]/.test(lower)) d += loop(w, -(30 + rnd() * 6))
-    else if (rnd() < 0.55) {
-      const k = 15 + rnd() * 6
-      d += " C" + r1(x + w * 0.1) + " " + r1(base - k) + " " + r1(x + w * 0.8) + " " + r1(base - k) + " " + r1(x + w) + " " + base
-    } else d += loop(w, 16 + rnd() * 5)
-    x += w
-  })
-  d +=
-    " C" + r1(x + 18) + " " + (base - 6) + " " + r1(x + 20) + " " + (base + 16) + " " + r1(x - 6) + " " + (base + 18) +
-    " C" + r1(x * 0.55) + " " + (base + 22) + " " + r1(x * 0.25) + " " + (base + 12) + " 4 " + (base + 20)
-  return { d, width: r1(x + 24) }
-}
 // #endregion sign
 
 // #region art
@@ -582,9 +440,9 @@ const FTP_CSS = `
 .ftp-head-tag{position:absolute;left:4px;top:-8px;height:clamp(22px,3vw,34px);width:auto;opacity:.9}
 .ftp-head-word{position:relative;height:clamp(40px,7.4vw,92px);width:auto;max-width:100%;margin-top:14px}
 .ftp-head-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px 24px}
-.ftp-head-local{font-size:clamp(28px,4.6vw,58px);font-weight:800;color:var(--ftp-blue);letter-spacing:.02em;line-height:1}
-.ftp-head-sig{position:absolute;left:clamp(150px,34vw,440px);top:clamp(20px,4vw,50px);height:clamp(56px,8.4vw,110px);width:auto;color:var(--ftp-green)}
-.ftp-kicker{font-size:13px;color:var(--ftp-muted);max-width:420px;line-height:1.55}
+.ftp-head-local{font-size:clamp(20px,3.2vw,36px);font-weight:800;color:var(--ftp-blue);letter-spacing:.08em;line-height:1;text-transform:uppercase}
+.ftp-head-sig{display:none}
+.ftp-kicker{font-size:13.5px;color:var(--ftp-muted);max-width:540px;line-height:1.6}
 
 .ftp-cover{padding-bottom:0}
 .ftp-cover-top{position:relative;margin-top:22px}
@@ -595,7 +453,7 @@ const FTP_CSS = `
 .ftp-cover-mid{position:relative;display:grid;grid-template-columns:1.25fr 1fr;gap:20px 40px;align-items:end;margin-top:clamp(14px,2vw,24px)}
 .ftp-sub{position:relative;font-size:clamp(38px,7vw,92px);font-weight:500;line-height:1;letter-spacing:.02em;color:var(--ftp-muted);white-space:nowrap}
 .ftp-sub b{font-weight:700;color:var(--ftp-blue)}
-.ftp-sub-sig{position:absolute;left:38%;top:22%;height:clamp(64px,10vw,140px);width:auto;color:var(--ftp-green)}
+.ftp-sub-sig{display:none}
 .ftp-pill{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 6px 0 18px;border-radius:12px;background:var(--ftp-blue);color:#fff;font-size:clamp(14px,1.6vw,18px);font-weight:600;letter-spacing:.04em}
 .ftp-pill-arrow{width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18);transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
 .ftp-pill:hover .ftp-pill-arrow{transform:rotate(-45deg)}
@@ -659,15 +517,14 @@ const FTP_CSS = `
 .ftp-badge{display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:8px;background:var(--c);color:var(--on);font-size:12.5px;font-weight:700;letter-spacing:.04em}
 .ftp-cols ul{margin-top:10px;font-size:12.5px;line-height:1.75;color:var(--ftp-soft)}
 .ftp-tl{margin-top:30px}
-.ftp-tl-track{position:relative;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:12px;margin-top:18px}
-.ftp-tl-track::before{content:"";position:absolute;left:0;right:0;top:44px;height:1.5px;background:var(--ftp-line)}
-.ftp-tl-item{position:relative;display:block;padding-right:8px}
-.ftp-tl-date{font-size:clamp(17px,2vw,24px);font-weight:700;color:var(--ftp-blue);font-variant-numeric:tabular-nums;white-space:nowrap;filter:blur(3.2px);opacity:.55;transition:filter .4s,opacity .4s}
-.ftp-tl-item[data-on="true"] .ftp-tl-date{filter:none;opacity:1}
-.ftp-tl-dot{position:relative;display:block;width:11px;height:11px;margin:12px 0 12px 2px;border-radius:99px;background:var(--ftp-sheet);box-shadow:inset 0 0 0 2px var(--ftp-faint);transition:box-shadow .3s,transform .4s cubic-bezier(.3,1.6,.5,1)}
-.ftp-tl-item[data-on="true"] .ftp-tl-dot{box-shadow:inset 0 0 0 3.5px var(--ftp-blue);transform:scale(1.25)}
-.ftp-tl-title{font-size:13px;font-weight:600;color:var(--ftp-ink)}
-.ftp-tl-place{font-size:12px;color:var(--ftp-muted)}
+.ftp-tl-track{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+.ftp-tl-track::before{display:none}
+.ftp-tl-item{position:relative;display:flex;flex-direction:column;padding:12px 14px;border-radius:10px;border:1px solid var(--ftp-line);background:rgba(255,255,255,.02);transition:all .25s ease;cursor:pointer}
+.ftp-tl-item[data-on="true"],.ftp-tl-item:hover{border-color:var(--ftp-blue);background:rgba(59,130,246,.08);transform:translateY(-2px);box-shadow:0 8px 20px -8px rgba(59,130,246,.25)}
+.ftp-tl-date{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ftp-blue);margin-bottom:6px;filter:none!important;opacity:1!important}
+.ftp-tl-dot{display:none}
+.ftp-tl-title{font-size:13.5px;font-weight:700;color:var(--ftp-ink);line-height:1.35}
+.ftp-tl-place{font-size:12px;color:var(--ftp-muted);margin-top:4px;line-height:1.4}
 .ftp-contacts{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:28px;padding-top:18px;border-top:1px dashed var(--ftp-line)}
 .ftp-contact{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ftp-soft);transition:color .2s}
 .ftp-contact:hover{color:var(--ftp-blue)}
@@ -800,10 +657,10 @@ const FTP_CSS = `
 .ftp-dfold:hover{transform:translateY(-10px)}
 .ftp-dl-years{display:none}
 .ftp-cols{grid-template-columns:1fr}
-.ftp-tl-track{grid-template-columns:1fr;gap:4px}
-.ftp-tl-track::before{left:7px;right:auto;top:8px;bottom:8px;width:1.5px;height:auto}
-.ftp-tl-item{display:grid;grid-template-columns:22px 1fr;column-gap:10px;align-items:center}
-.ftp-tl-dot{grid-row:1/span 3;margin:0 0 0 2px}
+.ftp-tl-track{grid-template-columns:1fr;gap:10px}
+.ftp-tl-track::before{display:none}
+.ftp-tl-item{display:flex;flex-direction:column;padding:12px 14px}
+.ftp-tl-dot{display:none}
 .ftp-count{display:none}
 .ftp-meta span:nth-child(n+3):not([data-on="true"]){display:none}
 .ftp-band-go{padding-left:clamp(14px,2.4vw,28px);flex-direction:column;align-items:flex-start}
@@ -886,15 +743,6 @@ function StrokeText({
   )
 }
 
-function Signature({ text, className, delay = 0, weight = 3.2 }: { text: string; className?: string; delay?: number; weight?: number }) {
-  const sig = React.useMemo(() => signaturePath(text), [text])
-  const w = sig.width + 34
-  return (
-    <svg className={"ftp-sig" + (className ? " " + className : "")} viewBox={"-30 -2 " + w + " 106"} width={w} height={106} aria-hidden="true" style={{ "--d": delay + "ms" } as Vars}>
-      <path d={sig.d} transform="skewX(-14)" fill="none" stroke="currentColor" strokeWidth={weight} strokeLinecap="round" strokeLinejoin="round" pathLength={1} className="ftp-draw" />
-    </svg>
-  )
-}
 
 /* ---------------------------------------------------------------- folder */
 
@@ -1128,176 +976,220 @@ function CoverArt({ kind, seed, mark, colors }: { kind: CoverKind; seed: number;
   const id = React.useId().replace(/:/g, "")
   const rnd = rng(seed)
   const pick = (): string => colors[TONES[Math.floor(rnd() * TONES.length)]]
-  const font = "ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif"
+  const font = "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
   const common = { viewBox: "0 0 320 220", width: 320, height: 220, preserveAspectRatio: "xMidYMid slice", "aria-hidden": true } as const
 
+  // AI & ML: Neural networks, vector attention graphs, tensor matrices
   if (kind === "render") {
-    const a = pick()
-    const cx = 120 + rnd() * 80
+    const accent = pick()
     return (
       <svg {...common}>
         <defs>
-          <linearGradient id={id + "-bg"} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#eef2ff" />
-            <stop offset="1" stopColor={a} stopOpacity=".55" />
-          </linearGradient>
-          <radialGradient id={id + "-ball"} cx=".35" cy=".3" r=".75">
-            <stop offset="0" stopColor="#ffffff" />
-            <stop offset=".35" stopColor={a} />
-            <stop offset="1" stopColor="#1b2234" stopOpacity=".85" />
-          </radialGradient>
-          <linearGradient id={id + "-pill"} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#ffffff" stopOpacity=".95" />
-            <stop offset="1" stopColor={colors.blue} stopOpacity=".7" />
+          <linearGradient id={id + "-bg"} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#0b1120" />
+            <stop offset="100%" stopColor="#1e293b" />
           </linearGradient>
         </defs>
         <rect width="320" height="220" fill={"url(#" + id + "-bg)"} />
-        <ellipse cx="160" cy="186" rx="150" ry="22" fill="#ffffff" opacity=".55" />
-        <ellipse cx={r1(cx)} cy="182" rx="52" ry="9" fill="#1b2234" opacity=".18" />
-        <circle cx={r1(cx)} cy="128" r="52" fill={"url(#" + id + "-ball)"} />
-        <ellipse cx={r1(cx - 18)} cy="104" rx="16" ry="9" fill="#fff" opacity=".7" transform={"rotate(-30 " + r1(cx - 18) + " 104)"} />
-        <rect x={r1(cx + 30)} y="62" width="96" height="34" rx="17" fill={"url(#" + id + "-pill)"} transform={"rotate(-24 " + r1(cx + 78) + " 79)"} />
-        <g transform={"translate(" + r1(40 + rnd() * 30) + " 132)"}>
-          <path d="M0 14 L22 0 L44 14 L22 28Z" fill="#ffffff" />
-          <path d="M0 14 L22 28 V54 L0 40Z" fill={colors.green} />
-          <path d="M44 14 L22 28 V54 L44 40Z" fill={colors.green} opacity=".7" />
+        <path d="M0 44 H320 M0 88 H320 M0 132 H320 M0 176 H320 M64 0 V220 M128 0 V220 M192 0 V220 M256 0 V220" stroke="#334155" strokeWidth="0.75" strokeDasharray="3 3" opacity="0.4" />
+        <g stroke={accent} strokeWidth="1.2" opacity="0.6">
+          <line x1="50" y1="70" x2="120" y2="50" />
+          <line x1="50" y1="70" x2="120" y2="100" />
+          <line x1="50" y1="130" x2="120" y2="100" />
+          <line x1="50" y1="130" x2="120" y2="150" />
+          <line x1="120" y1="50" x2="190" y2="60" />
+          <line x1="120" y1="100" x2="190" y2="110" />
+          <line x1="120" y1="150" x2="190" y2="160" />
+          <line x1="190" y1="60" x2="260" y2="100" />
+          <line x1="190" y1="110" x2="260" y2="100" />
+          <line x1="190" y1="160" x2="260" y2="100" />
         </g>
-        <text x="18" y="30" fontFamily={font} fontSize="11" fontWeight="700" letterSpacing="2" fill="#1b2234" opacity=".7">
-          {mark} · 3D
+        <g fill="#0f172a" stroke={accent} strokeWidth="2">
+          <circle cx="50" cy="70" r="8" fill={accent} />
+          <circle cx="50" cy="130" r="8" />
+          <circle cx="120" cy="50" r="9" />
+          <circle cx="120" cy="100" r="10" fill={colors.green} stroke={colors.green} />
+          <circle cx="120" cy="150" r="9" />
+          <circle cx="190" cy="60" r="9" />
+          <circle cx="190" cy="110" r="10" fill={accent} />
+          <circle cx="190" cy="160" r="9" />
+          <circle cx="260" cy="100" r="11" fill="#38bdf8" stroke="#38bdf8" />
+        </g>
+        <circle cx="260" cy="100" r="22" stroke="#38bdf8" strokeWidth="1" strokeDasharray="4 4" fill="none" opacity="0.5" />
+        <rect x="18" y="14" width="8" height="8" rx="4" fill="#ef4444" opacity="0.8" />
+        <rect x="30" y="14" width="8" height="8" rx="4" fill="#f59e0b" opacity="0.8" />
+        <rect x="42" y="14" width="8" height="8" rx="4" fill="#10b981" opacity="0.8" />
+        <text x="58" y="22" fontFamily={font} fontSize="10" fontWeight="700" fill="#94a3b8">
+          {"[AGENTIC_AI]"}
+        </text>
+        <rect x="18" y="180" width="130" height="24" rx="6" fill="rgba(15, 23, 42, 0.85)" stroke={accent} strokeWidth="1" />
+        <text x="28" y="196" fontFamily={font} fontSize="11" fontWeight="700" letterSpacing="1.5" fill="#f8fafc">
+          {mark + " // MODEL"}
         </text>
       </svg>
     )
   }
 
+  // Cloud Telemetry & Observability
   if (kind === "page") {
-    const a = pick()
+    const accent = pick()
     return (
       <svg {...common}>
-        <rect width="320" height="220" fill="#eef1f6" />
-        <circle cx="262" cy="40" r="70" fill={a} opacity=".22" />
-        <g transform="translate(36 18)">
-          <rect width="112" height="210" rx="16" fill="#ffffff" />
-          <rect x="8" y="8" width="96" height="70" rx="10" fill={a} opacity=".9" />
-          <circle cx="56" cy="46" r="20" fill="#ffffff" opacity=".9" />
-          <text x="56" y="51" textAnchor="middle" fontFamily={font} fontSize="11" fontWeight="800" fill={a}>
-            {mark.slice(0, 4)}
-          </text>
-          <rect x="10" y="88" width="64" height="7" rx="3.5" fill="#1b2234" />
-          <rect x="10" y="100" width="88" height="5" rx="2.5" fill="#c6cad5" />
-          <rect x="10" y="110" width="76" height="5" rx="2.5" fill="#c6cad5" />
-          <rect x="10" y="124" width="42" height="34" rx="6" fill="#eef1f6" />
-          <rect x="56" y="124" width="42" height="34" rx="6" fill="#eef1f6" />
-          <rect x="10" y="168" width="92" height="18" rx="9" fill={a} />
+        <defs>
+          <linearGradient id={id + "-dash"} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#0f172a" />
+            <stop offset="100%" stopColor="#1e1b4b" />
+          </linearGradient>
+        </defs>
+        <rect width="320" height="220" fill={"url(#" + id + "-dash)"} />
+        <rect x="16" y="16" width="288" height="32" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" />
+        <circle cx="32" cy="32" r="5" fill="#10b981" />
+        <text x="44" y="36" fontFamily={font} fontSize="11" fontWeight="700" fill="#38bdf8">
+          {"AWS ECS // 3,450 req/s"}
+        </text>
+        <text x="290" y="36" textAnchor="end" fontFamily={font} fontSize="10" fontWeight="600" fill="#94a3b8">
+          {"p95: 4.2ms"}
+        </text>
+        <g transform="translate(16 60)">
+          <rect width="288" height="96" rx="8" fill="rgba(15, 23, 42, 0.7)" stroke="rgba(255,255,255,0.08)" />
+          <line x1="12" y1="30" x2="276" y2="30" stroke="#334155" strokeWidth="0.75" strokeDasharray="3 3" opacity="0.5" />
+          <line x1="12" y1="60" x2="276" y2="60" stroke="#334155" strokeWidth="0.75" strokeDasharray="3 3" opacity="0.5" />
+          <path d="M 12 75 Q 40 40 70 65 T 120 50 T 170 35 T 220 55 T 276 25" fill="none" stroke={accent} strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M 12 75 Q 40 40 70 65 T 120 50 T 170 35 T 220 55 T 276 25 L 276 90 L 12 90 Z" fill={accent} opacity="0.15" />
+          <circle cx="276" cy="25" r="4" fill="#ffffff" stroke={accent} strokeWidth="2" />
         </g>
-        <g transform="translate(170 64)">
-          <rect width="118" height="40" rx="12" fill="#ffffff" />
-          <text x="14" y="26" fontFamily={font} fontSize="16" fontWeight="800" fill="#1b2234">
-            {"¥" + (59 + Math.floor(rnd() * 140))}
+        <g transform="translate(16 168)">
+          <rect width="90" height="24" rx="6" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" strokeWidth="1" />
+          <text x="45" y="16" textAnchor="middle" fontFamily={font} fontSize="10" fontWeight="700" fill="#34d399">
+            {"CACHE 99.4%"}
           </text>
-          <rect x="74" y="12" width="32" height="16" rx="8" fill={colors.orange} />
-          <rect x="0" y="54" width="92" height="30" rx="10" fill="#ffffff" opacity=".85" />
-          <rect x="12" y="66" width="56" height="6" rx="3" fill="#c6cad5" />
-          <rect x="0" y="96" width="110" height="30" rx="10" fill={a} opacity=".9" />
-          <text x="14" y="116" fontFamily={font} fontSize="10" fontWeight="700" letterSpacing="1.5" fill="#ffffff">
-            DETAILS →
+          <rect x="98" y="0" width="94" height="24" rx="6" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" strokeWidth="1" />
+          <text x="145" y="16" textAnchor="middle" fontFamily={font} fontSize="10" fontWeight="700" fill="#7dd3fc">
+            {"SHARDED DB"}
+          </text>
+          <text x="288" y="17" textAnchor="end" fontFamily={font} fontSize="14" fontWeight="800" fill="#f8fafc">
+            {mark}
           </text>
         </g>
       </svg>
     )
   }
 
+  // Quantitative Algorithms & Mathematical Optimization
   if (kind === "sale") {
-    const confetti = Array.from({ length: 22 }, () => ({ x: rnd() * 320, y: rnd() * 220, r: rnd() * 180, c: pick() }))
     return (
       <svg {...common}>
-        <rect width="320" height="220" fill={colors.yellow} />
-        {confetti.map((c, i) => (
-          <rect key={i} x={r1(c.x)} y={r1(c.y)} width="8" height="3.5" rx="1.5" fill={c.c} transform={"rotate(" + r1(c.r) + " " + r1(c.x) + " " + r1(c.y) + ")"} />
-        ))}
-        <polygon
-          points={Array.from({ length: 24 }, (_, i) => {
-            const ang = (i / 24) * Math.PI * 2
-            const rr = i % 2 ? 54 : 68
-            return r1(236 + Math.cos(ang) * rr) + "," + r1(80 + Math.sin(ang) * rr)
-          }).join(" ")}
-          fill={colors.orange}
-        />
-        <text x="236" y="76" textAnchor="middle" fontFamily={font} fontSize="18" fontWeight="900" fill="#ffffff">
-          SALE
+        <defs>
+          <linearGradient id={id + "-quant"} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#18181b" />
+            <stop offset="100%" stopColor="#27272a" />
+          </linearGradient>
+        </defs>
+        <rect width="320" height="220" fill={"url(#" + id + "-quant)"} />
+        <line x1="30" y1="20" x2="30" y2="180" stroke="#52525b" strokeWidth="1.5" />
+        <line x1="30" y1="180" x2="300" y2="180" stroke="#52525b" strokeWidth="1.5" />
+        <text x="25" y="18" textAnchor="end" fontFamily={font} fontSize="9" fill="#a1a1aa">{"RETURN"}</text>
+        <text x="300" y="196" textAnchor="end" fontFamily={font} fontSize="9" fill="#a1a1aa">{"RISK (σ)"}</text>
+        <g fill="#71717a" opacity="0.4">
+          <circle cx="80" cy="140" r="2.5" />
+          <circle cx="110" cy="130" r="3" />
+          <circle cx="130" cy="145" r="2.5" />
+          <circle cx="150" cy="120" r="3" />
+          <circle cx="170" cy="110" r="2" />
+          <circle cx="190" cy="95" r="3" />
+          <circle cx="210" cy="90" r="2.5" />
+          <circle cx="230" cy="80" r="3" />
+        </g>
+        <path d="M 60 170 C 80 110, 140 55, 280 40" fill="none" stroke={colors.orange} strokeWidth="3" strokeLinecap="round" />
+        <line x1="30" y1="150" x2="260" y2="25" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4 3" />
+        <circle cx="165" cy="72" r="6" fill="#38bdf8" stroke="#ffffff" strokeWidth="2" />
+        <rect x="178" y="58" width="112" height="22" rx="4" fill="rgba(15, 23, 42, 0.9)" stroke="#38bdf8" strokeWidth="0.75" />
+        <text x="184" y="73" fontFamily={font} fontSize="9.5" fontWeight="700" fill="#38bdf8">
+          {"SHARPE MAX: 1.84"}
         </text>
-        <text x="236" y="96" textAnchor="middle" fontFamily={font} fontSize="10" fontWeight="700" letterSpacing="2" fill="#ffffff">
-          TODAY
-        </text>
-        <text x="20" y="168" fontFamily={font} fontSize="78" fontWeight="900" letterSpacing="-3" fill="#1b2234">
+        <rect x="30" y="188" width="90" height="20" rx="4" fill="rgba(245, 158, 11, 0.15)" stroke={colors.orange} strokeWidth="1" />
+        <text x="75" y="202" textAnchor="middle" fontFamily={font} fontSize="10" fontWeight="700" fill={colors.orange}>
           {mark}
         </text>
-        <text x="22" y="196" fontFamily={font} fontSize="12" fontWeight="700" letterSpacing="4" fill="#1b2234" opacity=".6">
-          LIMITED · OFF
-        </text>
-        <g transform="translate(24 30) rotate(-8)">
-          <path d="M0 0 H74 L90 16 L74 32 H0Z" fill={colors.blue} />
-          <circle cx="76" cy="16" r="4" fill={colors.yellow} />
-          <text x="10" y="21" fontFamily={font} fontSize="12" fontWeight="800" fill="#ffffff">
-            DEALS
-          </text>
-        </g>
       </svg>
     )
   }
 
+  // Distributed Systems & Infrastructure
   if (kind === "brand") {
     const bg = pick()
     return (
       <svg {...common}>
-        <rect width="320" height="220" fill={bg === colors.yellow ? colors.orange : bg} />
-        {[0, 1, 2, 3, 4, 5].map((i) => {
-          const gx = 34 + (i % 3) * 90
-          const gy = 46 + Math.floor(i / 3) * 92
-          const s = Math.floor(rnd() * 4)
-          return (
-            <g key={i} transform={"translate(" + gx + " " + gy + ")"} fill="none" stroke="#ffffff" strokeWidth="4" strokeLinecap="round">
-              {s === 0 && <circle cx="26" cy="26" r="22" />}
-              {s === 1 && <rect x="4" y="4" width="44" height="44" rx="12" />}
-              {s === 2 && <path d="M26 4 L48 46 H4Z" strokeLinejoin="round" />}
-              {s === 3 && <path d="M4 26 C14 4 38 4 48 26 C38 48 14 48 4 26Z" />}
-              {i === 4 && (
-                <text x="26" y="33" textAnchor="middle" fontFamily={font} fontSize="18" fontWeight="900" fill="#ffffff" stroke="none">
-                  {mark.slice(0, 1)}
-                </text>
-              )}
-            </g>
-          )
-        })}
-        <text x="300" y="206" textAnchor="end" fontFamily={font} fontSize="11" fontWeight="700" letterSpacing="3" fill="#ffffff" opacity=".8">
+        <defs>
+          <linearGradient id={id + "-dist"} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#020617" />
+            <stop offset="100%" stopColor="#0f172a" />
+          </linearGradient>
+        </defs>
+        <rect width="320" height="220" fill={"url(#" + id + "-dist)"} />
+        <g stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="4 4" fill="none">
+          <circle cx="160" cy="110" r="70" />
+          <circle cx="160" cy="110" r="40" />
+        </g>
+        <g stroke={bg} strokeWidth="1.5" opacity="0.6">
+          <line x1="160" y1="40" x2="225" y2="85" />
+          <line x1="225" y1="85" x2="225" y2="145" />
+          <line x1="225" y1="145" x2="160" y2="180" />
+          <line x1="160" y1="180" x2="95" y2="145" />
+          <line x1="95" y1="145" x2="95" y2="85" />
+          <line x1="95" y1="85" x2="160" y2="40" />
+          <line x1="160" y1="110" x2="160" y2="40" />
+          <line x1="160" y1="110" x2="225" y2="145" />
+          <line x1="160" y1="110" x2="95" y2="145" />
+        </g>
+        <g fill="#020617" stroke={bg} strokeWidth="2">
+          <rect x="146" y="28" width="28" height="24" rx="4" />
+          <rect x="211" y="73" width="28" height="24" rx="4" fill={bg} />
+          <rect x="211" y="133" width="28" height="24" rx="4" />
+          <rect x="146" y="168" width="28" height="24" rx="4" />
+          <rect x="81" y="133" width="28" height="24" rx="4" fill={bg} />
+          <rect x="81" y="73" width="28" height="24" rx="4" />
+          <circle cx="160" cy="110" r="14" fill="#3b82f6" stroke="#ffffff" strokeWidth="2" />
+        </g>
+        <text x="160" y="114" textAnchor="middle" fontFamily={font} fontSize="9" fontWeight="800" fill="#ffffff">
+          {"RAFT"}
+        </text>
+        <text x="18" y="24" fontFamily={font} fontSize="10" fontWeight="700" letterSpacing="1.5" fill="#38bdf8">
+          {"[CLUSTER_SHARDING]"}
+        </text>
+        <text x="302" y="204" textAnchor="end" fontFamily={font} fontSize="14" fontWeight="800" fill="#f8fafc">
           {mark}
         </text>
       </svg>
     )
   }
 
-  // poster
-  const bg = pick()
-  const fg = pick()
-  const cx = 80 + rnd() * 160
-  const cy = 50 + rnd() * 70
+  // Developer Terminal & API Microservices (poster)
   return (
     <svg {...common}>
-      <rect width="320" height="220" fill={bg === colors.yellow ? colors.blue : bg} />
-      <circle cx={r1(cx)} cy={r1(cy)} r={r1(56 + rnd() * 30)} fill={fg === bg ? "#ffffff" : fg} opacity=".9" />
-      <g stroke="#ffffff" strokeWidth="2" opacity=".28">
-        {Array.from({ length: 9 }, (_, i) => (
-          <line key={i} x1={-40 + i * 44} y1="220" x2={60 + i * 44} y2="0" />
-        ))}
+      <defs>
+        <linearGradient id={id + "-term"} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#0f172a" />
+          <stop offset="100%" stopColor="#1e293b" />
+        </linearGradient>
+      </defs>
+      <rect width="320" height="220" fill={"url(#" + id + "-term)"} />
+      <rect x="16" y="16" width="288" height="188" rx="8" fill="#020617" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
+      <circle cx="32" cy="32" r="4.5" fill="#ef4444" />
+      <circle cx="45" cy="32" r="4.5" fill="#f59e0b" />
+      <circle cx="58" cy="32" r="4.5" fill="#10b981" />
+      <text x="80" y="36" fontFamily={font} fontSize="9" fill="#64748b">{"api.router.ts"}</text>
+      <g fontFamily={font} fontSize="10.5">
+        <text x="32" y="62" fill="#c084fc">{"export async function "} <tspan fill="#60a5fa">{"handler"}</tspan><tspan fill="#e2e8f0">{"(req) {"}</tspan></text>
+        <text x="44" y="82" fill="#94a3b8">{"  const session = await auth(req);"}</text>
+        <text x="44" y="102" fill="#94a3b8">{"  const stream = await rag.pipe({"}</text>
+        <text x="56" y="122" fill="#34d399">{"    model: 'gemini-embedding',"}</text>
+        <text x="56" y="142" fill="#f59e0b">{"    ttft: '<400ms'"}</text>
+        <text x="44" y="162" fill="#94a3b8">{"  });"}</text>
+        <text x="44" y="182" fill="#38bdf8">{"  return new Response(stream);"}</text>
+        <text x="32" y="196" fill="#e2e8f0">{"}"}</text>
       </g>
-      <g fill="#ffffff" opacity=".8">
-        {Array.from({ length: 20 }, (_, i) => (
-          <circle key={i} cx={252 + (i % 4) * 12} cy={128 + Math.floor(i / 4) * 12} r="2" />
-        ))}
-      </g>
-      <text x="16" y="28" fontFamily={font} fontSize="10" fontWeight="700" letterSpacing="2.5" fill="#ffffff">
-        {"VOL." + pad2(1 + Math.floor(rnd() * 12))}
-      </text>
-      <text x="14" y="200" fontFamily={font} fontSize="64" fontWeight="900" letterSpacing="-2" fill="#ffffff">
+      <text x="266" y="190" textAnchor="middle" fontFamily={font} fontSize="10" fontWeight="700" fill="#60a5fa">
         {mark}
       </text>
     </svg>
@@ -1379,19 +1271,18 @@ const DECK_SLOTS = [
 ]
 
 export default function FolderTabPortfolioTemplate({
-  name = "Aoi Lin",
-  localName = "林葵",
-  handle = "@aoilin.studio",
-  signature,
-  years = "2025–2026",
-  role = "Visual designer",
-  disciplines = ["Visual design", "Details page", "Posters"],
+  name = "Athul Sunil Kumar",
+  localName = "",
+  handle = "@athul-dev-sys",
+  years = "2024–2026",
+  role = "Full Stack Software Engineer",
+  disciplines = ["Distributed Systems & Cloud", "Agentic AI & ML", "Full-Stack Platforms"],
   word = "Portfolio",
-  tag = "#2026",
-  subtitle = ["設計", "作品集"],
-  notes = ["體驗思考", "視覺提升", "總結復盤"],
-  blurb = "A passionate and creative visual designer who loves to explore and practise across the many corners of design. E-commerce is the core of my work, and I keep growing in graphic and three-dimensional design.",
-  greeting = "Hi, I am",
+  tag = "#ATHUL",
+  subtitle = ["Systems &", " Intelligence"],
+  notes = ["High Throughput", "Low Latency", "Fault Tolerant"],
+  blurb = "Full Stack Software Engineer specializing in high-concurrency cloud architectures (AWS ECS, Kafka, Redis, PostgreSQL), resilient microservices, and production Agentic AI/ML systems. Founder of Tutora EdTech SaaS.",
+  greeting = "Hello, I'm",
   photo,
   highlights = DEFAULT_HIGHLIGHTS,
   timeline = DEFAULT_TIMELINE,
@@ -1400,9 +1291,9 @@ export default function FolderTabPortfolioTemplate({
   chapters = DEFAULT_CHAPTERS,
   steps = DEFAULT_STEPS,
   words = DEFAULT_WORDS,
-  email = "hello@aoilin.studio",
+  email = "athulsunilkumar6@gmail.com",
   contacts = DEFAULT_CONTACTS,
-  timeZone = "Asia/Shanghai",
+  timeZone = "Asia/Kolkata",
   colors,
   ligatures = true,
   defaultTheme = "system",
@@ -1420,7 +1311,6 @@ export default function FolderTabPortfolioTemplate({
   const photoRef = React.useRef(null as HTMLDivElement | null)
 
   const palette = React.useMemo(() => ({ ...TONE_HEX, ...colors }) as Record<FolderTone, string>, [colors])
-  const sig = signature ?? name.split(/\s+/)[0] ?? name
   const firstName = name.split(/\s+/)[0] || name
 
   const [theme, setTheme] = React.useState<Theme>(defaultTheme === "dark" ? "dark" : "light")
@@ -1664,9 +1554,8 @@ export default function FolderTabPortfolioTemplate({
         <h2 id={uid + "-" + id + "-h"} style={{ minWidth: 0, flex: "1 1 auto" }}>
           <StrokeText text={wordText} className="ftp-head-word" weight={10} outline={2.2} color="var(--ftp-blue)" ligatures={ligatures} />
         </h2>
-        {opts.local && <span className="ftp-head-local" lang="zh">{opts.local}</span>}
+        {opts.local && <span className="ftp-head-local">{opts.local}</span>}
       </div>
-      {opts.withSig && <Signature text={sig} className="ftp-head-sig" delay={500} />}
       {opts.kicker && <p className="ftp-kicker" style={{ marginTop: 14 }}>{opts.kicker}</p>}
     </div>
   )
@@ -1749,9 +1638,8 @@ export default function FolderTabPortfolioTemplate({
             </h1>
           </div>
           <div className="ftp-cover-mid">
-            <div className="ftp-sub" lang="zh">
+            <div className="ftp-sub">
               {subtitle.map((s, i) => (i % 2 ? <b key={i}>{s}</b> : <span key={i}>{s}</span>))}
-              <Signature text={sig} className="ftp-sub-sig" delay={900} />
             </div>
             <div>
               <button type="button" className="ftp-pill" onClick={() => goTo("about")}>
@@ -1793,11 +1681,11 @@ export default function FolderTabPortfolioTemplate({
                   aria-label={"Open " + c.label + ", " + countOf(c.id) + " projects"}
                 >
                   <span className="ftp-dl">
-                    <span className="ftp-dl-local" lang="zh">{c.local || c.label}</span>
+                    <span className="ftp-dl-local">{c.local || c.label}</span>
                     <span className="ftp-dl-n">{pad2(i + 1)}</span>
                   </span>
                   <span className="ftp-dl-en" style={{ display: "block" }}>
-                    {c.label} · {countOf(c.id)} {countOf(c.id) === 1 ? "work" : "works"}
+                    {c.label} · {countOf(c.id)} {countOf(c.id) === 1 ? "project" : "projects"}
                   </span>
                   {i === 2 && <span className="ftp-dl-years">{years}</span>}
                 </Folder>
@@ -1810,7 +1698,7 @@ export default function FolderTabPortfolioTemplate({
         {chapters.length > 0 && (
           <section className="ftp-sheet ftp-rv" {...sheetProps("contents")}>
             {meta("contents")}
-            {head("contents", "(" + pad2(chapters.length) + ")", "Catalogs", { local: "（目錄）", kicker: "Table of contents for " + name + "'s " + years + " portfolio. Open a folder to see what is inside." })}
+            {head("contents", "(" + pad2(chapters.length) + ")", "Catalogs", { local: "INDEX", kicker: "Table of contents for " + name + "'s " + years + " portfolio. Open a folder to see what is inside." })}
             <div className="ftp-band-list">
               {chapters.map((ch, i) => {
                 const open = chapter === i
@@ -1833,7 +1721,7 @@ export default function FolderTabPortfolioTemplate({
                       <span className="ftp-band-n">{pad2(i + 1)}</span>
                       <span style={{ minWidth: 0 }}>
                         <span className="ftp-band-t" style={{ display: "block" }}>{ch.title}</span>
-                        {open && ch.local && <span className="ftp-band-local" lang="zh">{ch.local}</span>}
+                        {open && ch.local && <span className="ftp-band-local">{ch.local}</span>}
                       </span>
                       {open && ch.points && ch.points.length > 0 && (
                         <ul className="ftp-band-pts">
@@ -1865,7 +1753,7 @@ export default function FolderTabPortfolioTemplate({
         {/* about */}
         <section className="ftp-sheet ftp-rv" {...sheetProps("about")}>
           {meta("about")}
-          {head("about", "#" + firstName, "About me", { withSig: true })}
+          {head("about", "#" + firstName, "About me", { local: "PROFILE" })}
           <div className="ftp-about">
             <div className="ftp-photo" ref={photoRef} onPointerMove={onPhotoMove} onPointerLeave={onPhotoLeave}>
               <Folder tone="blue" tabAt={0.08} tab={initialsOf(name) + " · " + handle.replace(/^@/, "").split(".")[0]} bodyClass="ftp-photo-body">
@@ -1960,7 +1848,7 @@ export default function FolderTabPortfolioTemplate({
         {projects.length > 0 && (
           <section className="ftp-sheet ftp-rv" {...sheetProps("work")}>
             {meta("work")}
-            {head("work", "(" + pad2(projects.length) + ")", "Works", { local: "作品", kicker: "Filter the cabinet by folder. Open any file for its details page; arrow keys page through." })}
+            {head("work", "(" + pad2(projects.length) + ")", "Featured Systems", { local: "PROJECTS", kicker: "Filter system cabinets by domain. Select any folder to inspect architecture diagrams, metrics, and implementation specs." })}
             <div className="ftp-filter">
               <TabBar items={filterItems} active={filter} onChange={setFilter} label="Filter work by category" idBase={uid + "-wf"} />
               <div className="ftp-bar" style={{ "--c": palette[filterTone] } as Vars} />
@@ -1992,7 +1880,7 @@ export default function FolderTabPortfolioTemplate({
                     <span className="ftp-card-cap">
                       <span>
                         <span className="ftp-card-t" style={{ display: "block" }}>{p.title}</span>
-                        {p.local && <span className="ftp-card-l" style={{ display: "block" }} lang="zh">{p.local}</span>}
+                        {p.local && <span className="ftp-card-l" style={{ display: "block" }}>{p.local}</span>}
                       </span>
                       <span className="ftp-card-y">{p.year}</span>
                     </span>
@@ -2008,7 +1896,7 @@ export default function FolderTabPortfolioTemplate({
         {steps.length > 0 && (
           <section className="ftp-sheet ftp-rv" {...sheetProps("process")}>
             {meta("process")}
-            {head("process", "(" + pad2(steps.length) + ")", "Process", { local: "流程" })}
+            {head("process", "(" + pad2(steps.length) + ")", "Engineering Methodology", { local: "SYSTEMS LIFE-CYCLE" })}
             <TabBar
               items={steps.map((s, i) => ({ id: String(i), label: pad2(i + 1) + " " + s.title, tone: stepTone(i) }))}
               active={String(Math.min(step, steps.length - 1))}
@@ -2026,7 +1914,7 @@ export default function FolderTabPortfolioTemplate({
                       <div className="ftp-step-n">{pad2(i + 1)}</div>
                       <h3 className="ftp-step-t">
                         {s.title}
-                        {s.local && <span className="ftp-step-l" lang="zh">{s.local}</span>}
+                        {s.local && <span className="ftp-step-l">{s.local}</span>}
                       </h3>
                       {s.duration && <span className="ftp-step-d">{s.duration}</span>}
                       <StepArt index={i} />
@@ -2065,7 +1953,7 @@ export default function FolderTabPortfolioTemplate({
         {words.length > 0 && (
           <section className="ftp-sheet ftp-rv" {...sheetProps("words")}>
             {meta("words")}
-            {head("words", "(" + pad2(words.length) + ")", "Kind words", { local: "評價" })}
+            {head("words", "(" + pad2(words.length) + ")", "Honors & Impact", { local: "ACHIEVEMENTS" })}
             <div className="ftp-words">
               <span className="ftp-blob" style={{ left: "8%", top: "18%", width: 220, height: 220, background: palette.blue, opacity: 0.85 }} />
               <span className="ftp-blob" style={{ left: "46%", top: "40%", width: 180, height: 180, background: palette.green, opacity: 0.85 }} />
@@ -2095,15 +1983,15 @@ export default function FolderTabPortfolioTemplate({
         {/* contact */}
         <section className="ftp-sheet ftp-rv" {...sheetProps("contact")}>
           {meta("contact")}
-          {head("contact", "(:)", "Contact", { local: "聯繫", withSig: true })}
+          {head("contact", "(:)", "Contact & Connect", { local: "COLLABORATION" })}
           <div className="ftp-stack">
             <Folder tone="blue" tabAt={0.78} tab={<>Reflections <Arrow size={12} /></>}>
               <div className="ftp-talk">
-                <StrokeText text="Let's talk :)" weight={15} tracking={22} color="#ffffff" label="Let's talk" />
-                <p>Open to full-time roles and selected freelance from {years.split(/[–-]/).pop()}. Briefs, questions and coffee invitations all welcome.</p>
+                <StrokeText text="Let's build :)" weight={15} tracking={22} color="#ffffff" label="Let's build" />
+                <p>Open to software engineering roles, high-concurrency architecture challenges, and frontier AI systems. Inquiries, discussions, and coffee chats are always welcome.</p>
               </div>
             </Folder>
-            <Folder tone="green" tabAt={0.56} tab={<>Elevation <Arrow size={12} /></>}>
+            <Folder tone="green" tabAt={0.56} tab={<>Direct Mail <Arrow size={12} /></>}>
               <div className="ftp-mail">
                 <a className="ftp-mail-a" href={"mailto:" + email}>
                   {email}
@@ -2119,7 +2007,7 @@ export default function FolderTabPortfolioTemplate({
               </div>
             </Folder>
             {contacts.length > 0 && (
-              <Folder tone="sheet" tabAt={0.3} tab={<>Summarize <Arrow size={12} /></>} style={{ filter: "drop-shadow(0 -6px 14px rgba(27,34,52,.08))" }}>
+              <Folder tone="sheet" tabAt={0.3} tab={<>Profiles & Links <Arrow size={12} /></>} style={{ filter: "drop-shadow(0 -6px 14px rgba(27,34,52,.08))" }}>
                 <div className="ftp-else">
                   {contacts.map((c) => (
                     <a key={c.label} href={c.href || "#"} target={c.href ? "_blank" : undefined} rel="noreferrer">
@@ -2138,12 +2026,12 @@ export default function FolderTabPortfolioTemplate({
 
         <footer className="ftp-foot">
           <span>
-            {disciplines[0] || "Visual design"}
+            {disciplines[0] || "Distributed Systems"}
             <small>
               © {years.split(/[–-]/).pop()} {name}
             </small>
           </span>
-          <span>And</span>
+          <span className="ftp-foot-brand" style={{ fontWeight: 700, letterSpacing: '0.08em', color: 'var(--ftp-blue)' }}>ATHUL SUNIL KUMAR</span>
           {clock && (
             <span className="ftp-clock">
               <i data-day={clock.day ? "true" : "false"} />
@@ -2186,7 +2074,7 @@ export default function FolderTabPortfolioTemplate({
                   <h3 className="ftp-modal-t" id={uid + "-dlg-t"}>
                     {project.title}
                   </h3>
-                  {project.local && <p className="ftp-modal-l" lang="zh">{project.local}</p>}
+                  {project.local && <p className="ftp-modal-l">{project.local}</p>}
                 </div>
                 <p className="ftp-modal-p">{project.summary}</p>
                 {project.body?.map((b, i) => (

@@ -16,7 +16,7 @@ export default function App() {
       ]}
       word="Portfolio"
       tag="#ATHUL"
-      subtitle={["Distributed Systems ", "& Agentic AI"]}
+      subtitle={["Distributed Systems", "& Agentic AI"]}
       notes={["3,450 req/s @ 4.2ms", "Zero Hallucination RAG", "SIH 2026 Finalist"]}
       blurb="Full Stack Software Engineer & Cloud Architect specializing in high-concurrency distributed platforms (AWS ECS, Kafka, Redis, PostgreSQL sharding), resilient microservices, and production Agentic AI/LLM systems. Founder of Tutora SaaS."
       greeting="Hello, I'm"
@@ -373,22 +373,22 @@ export default function App() {
       contacts={[
         {
           label: "Resume (PDF)",
-          value: "Download Athul's Resume",
+          value: "Athul's Resume",
           href: "./Athul_Sunil_Kumar_Resume.pdf",
         },
         {
           label: "GitHub",
-          value: "github.com/athul-dev-sys",
+          value: "athul-dev-sys",
           href: "https://github.com/athul-dev-sys",
         },
         {
           label: "LinkedIn",
-          value: "linkedin.com/in/athul-sunil-kumar",
+          value: "athul-sunil-kumar",
           href: "https://linkedin.com/in/athul-sunil-kumar",
         },
         {
           label: "LeetCode",
-          value: "leetcode.com/u/athulsunilkumar6",
+          value: "athulsunilkumar6",
           href: "https://leetcode.com/u/athulsunilkumar6",
         },
         {

@@ -449,9 +449,9 @@ const FTP_CSS = `
 .ftp-palm{position:absolute;right:-6%;top:-18%;width:min(62%,640px);height:auto;color:var(--ftp-blue);opacity:.07;pointer-events:none;transform-origin:30% 100%;animation:ftp-sway 9s ease-in-out infinite alternate}
 @keyframes ftp-sway{from{transform:rotate(-2deg)}to{transform:rotate(3deg)}}
 .ftp-cover-tag{position:absolute;left:2px;top:-4px;height:clamp(26px,4.6vw,60px);width:auto}
-.ftp-cover-word{position:relative;width:100%;height:auto;margin-top:clamp(26px,4.6vw,60px)}
-.ftp-cover-mid{position:relative;display:grid;grid-template-columns:1.25fr 1fr;gap:20px 40px;align-items:end;margin-top:clamp(14px,2vw,24px)}
-.ftp-sub{position:relative;font-size:clamp(38px,7vw,92px);font-weight:500;line-height:1;letter-spacing:.02em;color:var(--ftp-muted);white-space:nowrap}
+.ftp-cover-mid{position:relative;display:grid;grid-template-columns:1.2fr 1fr;gap:20px 40px;align-items:end;margin-top:clamp(14px,2vw,24px)}
+.ftp-sub{position:relative;font-size:clamp(28px,4vw,56px);font-weight:500;line-height:1.15;letter-spacing:-.01em;color:var(--ftp-muted);white-space:normal;display:flex;flex-direction:column;gap:4px;max-width:100%}
+.ftp-sub span,.ftp-sub b{display:block;white-space:normal;overflow-wrap:break-word}
 .ftp-sub b{font-weight:700;color:var(--ftp-blue)}
 .ftp-sub-sig{display:none}
 .ftp-pill{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 6px 0 18px;border-radius:12px;background:var(--ftp-blue);color:#fff;font-size:clamp(14px,1.6vw,18px);font-weight:600;letter-spacing:.04em}
@@ -584,19 +584,20 @@ const FTP_CSS = `
 .ftp-talk{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
 .ftp-talk .ftp-st{height:clamp(44px,8.4vw,108px);width:auto;max-width:100%}
 .ftp-talk p{max-width:320px;font-size:14px;color:var(--on2)}
-.ftp-mail{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.ftp-mail-a{font-size:clamp(22px,4.2vw,52px);font-weight:700;letter-spacing:.01em;color:var(--on);overflow-wrap:anywhere;background-image:linear-gradient(currentColor,currentColor);background-size:0 3px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .45s cubic-bezier(.2,.8,.2,1)}
+.ftp-mail{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 20px;min-width:0;overflow:hidden}
+.ftp-mail-a{font-size:clamp(18px,2.4vw,34px);font-weight:700;letter-spacing:.01em;color:var(--on);max-width:100%;word-break:break-word;overflow-wrap:anywhere;background-image:linear-gradient(currentColor,currentColor);background-size:0 3px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .45s cubic-bezier(.2,.8,.2,1)}
 .ftp-mail-a:hover{background-size:100% 3px}
-.ftp-btns{display:flex;gap:10px}
+.ftp-btns{display:flex;gap:10px;flex-shrink:0}
 .ftp-btn{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 18px;border-radius:12px;background:var(--on);color:var(--c);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
 .ftp-btn[data-ghost="true"]{background:transparent;color:var(--on);box-shadow:inset 0 0 0 1.5px var(--on2)}
 .ftp-btn:hover{transform:translateY(-2px)}
 .ftp-btn:active{transform:scale(.97)}
-.ftp-else{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
-.ftp-else a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-radius:12px;background:var(--ftp-ghost);color:var(--ftp-ink);transition:background-color .25s,color .25s}
+.ftp-else{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.ftp-else a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:12px;background:var(--ftp-ghost);color:var(--ftp-ink);min-width:0;overflow:hidden;transition:background-color .25s,color .25s}
 .ftp-else a:hover{background:var(--ftp-blue);color:#fff}
-.ftp-else small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
-.ftp-else svg{transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+.ftp-else a>span{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:600}
+.ftp-else small{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:3px;font-weight:700}
+.ftp-else svg{flex-shrink:0;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
 .ftp-else a:hover svg{transform:translate(2px,-2px)}
 
 .ftp-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding:34px 4px 40px;color:var(--ftp-blue);font-size:clamp(15px,1.8vw,20px);letter-spacing:.06em;text-transform:uppercase}
@@ -651,7 +652,7 @@ const FTP_CSS = `
 @media (max-width:720px){
 .ftp-mast-notes{display:none}
 .ftp-cover-mid{grid-template-columns:1fr}
-.ftp-sub{font-size:clamp(34px,11vw,60px)}
+.ftp-sub{font-size:clamp(22px,6.5vw,36px);line-height:1.15}
 .ftp-deck{height:var(--dhm)}
 .ftp-dfold{left:3%;width:94%;top:var(--mt)}
 .ftp-dfold:hover{transform:translateY(-10px)}

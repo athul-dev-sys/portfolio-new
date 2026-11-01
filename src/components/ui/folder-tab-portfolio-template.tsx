@@ -469,8 +469,8 @@ const FTP_CSS = `
 .ftp-photo{perspective:900px}
 .ftp-photo>.ftp-folder{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.3,1.2,.4,1);transform-style:preserve-3d}
 .ftp-photo-body{padding:10px}
-.ftp-photo-frame{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:5/6;background:#1d2b4f}
-.ftp-photo-frame>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ftp-photo-frame{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/5;background:#1d2b4f}
+.ftp-photo-frame>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
 .ftp-photo-glass{position:absolute;left:-4px;right:-4px;bottom:-4px;display:flex;align-items:flex-end;justify-content:space-between;padding:12px 16px 14px;border-radius:14px;background:var(--ftp-glass);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border:1px solid rgba(255,255,255,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
 .ftp-photo-glass .ftp-st{height:26px;width:auto}
 .ftp-hi{display:flex;align-items:center;gap:12px;font-size:clamp(26px,3.6vw,44px);font-weight:600;color:var(--ftp-blue);line-height:1.1;letter-spacing:.01em}

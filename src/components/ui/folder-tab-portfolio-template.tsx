@@ -357,7 +357,7 @@ const SECTIONS: { id: FolderSectionId; label: string; page: string }[] = [
 
 const FTP_CSS = `
 .ftp-root{--ftp-bg:#eef0f4;--ftp-sheet:#ffffff;--ftp-ink:#1b2234;--ftp-soft:#4a5268;--ftp-muted:#8a91a3;--ftp-faint:#c6cad5;--ftp-line:#e3e6ed;--ftp-ghost:#e6e9f0;--ftp-glass:rgba(255,255,255,.62);--ftp-shadow:0 1px 2px rgba(27,34,52,.05),0 18px 40px -24px rgba(27,34,52,.28);position:relative;isolation:isolate;overflow-x:clip;background:var(--ftp-bg);color:var(--ftp-ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Hiragino Sans","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;transition:background-color .4s ease,color .4s ease}
-.ftp-root[data-theme="dark"]{--ftp-bg:#0b0f1c;--ftp-sheet:#131a2c;--ftp-ink:#eaedf6;--ftp-soft:#bfc5d6;--ftp-muted:#8790a8;--ftp-faint:#3b445e;--ftp-line:#232b42;--ftp-ghost:#1f2740;--ftp-glass:rgba(22,29,48,.62);--ftp-shadow:0 1px 2px rgba(0,0,0,.4),0 20px 44px -22px rgba(0,0,0,.8)}
+.ftp-root[data-theme="dark"]{--ftp-bg:#070a14;--ftp-sheet:rgba(14,21,37,.72);--ftp-ink:#f1f5f9;--ftp-soft:#cbd5e1;--ftp-muted:#94a3b8;--ftp-faint:#334155;--ftp-line:rgba(255,255,255,.1);--ftp-ghost:rgba(30,41,59,.55);--ftp-glass:rgba(15,23,42,.75);--ftp-shadow:0 24px 60px -15px rgba(0,0,0,.7),0 0 1px 1px rgba(255,255,255,.08)}
 .ftp-root ::selection{background:var(--ftp-blue);color:#fff}
 .ftp-root :focus-visible{outline:2px solid var(--ftp-blue);outline-offset:3px;border-radius:8px}
 .ftp-root :where(button){font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:inherit}
@@ -367,27 +367,67 @@ const FTP_CSS = `
 .ftp-root :where(svg){display:block;max-width:none;flex:none}
 .ftp-root :where(img){max-width:none;display:block}
 .ftp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.ftp-wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+.ftp-wrap{max-width:1240px;margin:0 auto;padding:0 20px;position:relative;z-index:2}
 
+/* Dynamic Cyber Backdrop & Interactive Spotlight */
+.ftp-backdrop{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.ftp-spotlight{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(900px circle at var(--mx,50vw) var(--my,25vh),rgba(59,130,246,.15),transparent 70%);opacity:.95;transition:opacity .4s ease}
+.ftp-grid-bg{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(to right,rgba(59,130,246,.03) 1px,transparent 1px),linear-gradient(to bottom,rgba(59,130,246,.03) 1px,transparent 1px);background-size:32px 32px,128px 128px,128px 128px;mask-image:radial-gradient(ellipse 95% 80% at 50% 30%,black 40%,transparent 95%);-webkit-mask-image:radial-gradient(ellipse 95% 80% at 50% 30%,black 40%,transparent 95%);opacity:.85}
+.ftp-aurora-wrap{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.ftp-aurora-orb{position:absolute;border-radius:9999px;filter:blur(85px);opacity:.42;mix-blend-mode:screen;will-change:transform;pointer-events:none}
+.ftp-aurora-1{width:560px;height:560px;left:-100px;top:40px;background:radial-gradient(circle,#3b82f6 0%,rgba(59,130,246,0) 70%);animation:ftp-float-1 20s ease-in-out infinite alternate}
+.ftp-aurora-2{width:620px;height:620px;right:-120px;top:280px;background:radial-gradient(circle,#8b5cf6 0%,rgba(139,92,246,0) 70%);animation:ftp-float-2 24s ease-in-out infinite alternate}
+.ftp-aurora-3{width:500px;height:500px;left:28%;top:52%;background:radial-gradient(circle,#10b981 0%,rgba(16,185,129,0) 70%);animation:ftp-float-3 22s ease-in-out infinite alternate}
+.ftp-aurora-4{width:540px;height:540px;right:12%;top:78%;background:radial-gradient(circle,#06b6d4 0%,rgba(6,182,212,0) 70%);animation:ftp-float-1 28s ease-in-out infinite alternate-reverse}
+@keyframes ftp-float-1{0%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,40px) scale(1.1)}100%{transform:translate(-30px,80px) scale(.95)}}
+@keyframes ftp-float-2{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-70px,60px) scale(1.15)}100%{transform:translate(40px,-40px) scale(.9)}}
+@keyframes ftp-float-3{0%{transform:translate(0,0) scale(.95)}50%{transform:translate(50px,-50px) scale(1.08)}100%{transform:translate(-60px,30px) scale(1.02)}}
+
+/* Tactical HUD Telemetry Ribbon */
+.ftp-hud-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;padding:10px 18px;margin:16px 0 22px;border-radius:14px;background:rgba(15,23,42,.65);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 24px -6px rgba(0,0,0,.4);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:11.5px;letter-spacing:.04em}
+.ftp-hud-item{display:flex;align-items:center;gap:7px}
+.ftp-hud-pulse{width:7px;height:7px;border-radius:99px;background:#10b981;box-shadow:0 0 10px #10b981;animation:ftp-hud-blink 1.8s ease-in-out infinite}
+@keyframes ftp-hud-blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+.ftp-hud-label{color:var(--ftp-muted);font-weight:600;font-size:10px;letter-spacing:.06em}
+.ftp-hud-val{font-weight:700}
+.ftp-hud-green{color:#34d399}
+.ftp-hud-blue{color:#60a5fa}
+.ftp-hud-cyan{color:#38bdf8}
+.ftp-hud-orange{color:#fb923c}
+.ftp-hud-sep{width:1px;height:14px;background:rgba(255,255,255,.12)}
+
+/* Folders & Glassmorphic Shapes */
 .ftp-folder{position:relative;padding-top:var(--th,30px);--fr:12px;--br:18px}
-.ftp-folder[data-tone="blue"],.ftp-tabshape[data-tone="blue"],.ftp-panel[data-tone="blue"]{--c:var(--ftp-blue);--on:#ffffff;--on2:rgba(255,255,255,.72)}
-.ftp-folder[data-tone="green"],.ftp-tabshape[data-tone="green"],.ftp-panel[data-tone="green"]{--c:var(--ftp-green);--on:#ffffff;--on2:rgba(255,255,255,.78)}
-.ftp-folder[data-tone="orange"],.ftp-tabshape[data-tone="orange"],.ftp-panel[data-tone="orange"]{--c:var(--ftp-orange);--on:#ffffff;--on2:rgba(255,255,255,.78)}
+.ftp-folder[data-tone="blue"],.ftp-tabshape[data-tone="blue"],.ftp-panel[data-tone="blue"]{--c:var(--ftp-blue);--on:#ffffff;--on2:rgba(255,255,255,.75)}
+.ftp-folder[data-tone="green"],.ftp-tabshape[data-tone="green"],.ftp-panel[data-tone="green"]{--c:var(--ftp-green);--on:#ffffff;--on2:rgba(255,255,255,.82)}
+.ftp-folder[data-tone="orange"],.ftp-tabshape[data-tone="orange"],.ftp-panel[data-tone="orange"]{--c:var(--ftp-orange);--on:#ffffff;--on2:rgba(255,255,255,.82)}
 .ftp-folder[data-tone="yellow"],.ftp-tabshape[data-tone="yellow"],.ftp-panel[data-tone="yellow"]{--c:var(--ftp-yellow);--on:#5d5434;--on2:rgba(93,84,52,.7)}
+.ftp-root[data-theme="dark"] .ftp-folder[data-tone="yellow"],.ftp-root[data-theme="dark"] .ftp-tabshape[data-tone="yellow"],.ftp-root[data-theme="dark"] .ftp-panel[data-tone="yellow"]{--c:var(--ftp-yellow);--on:#fef08a;--on2:rgba(254,240,138,.8)}
 .ftp-folder[data-tone="sheet"],.ftp-tabshape[data-tone="sheet"]{--c:var(--ftp-sheet);--on:var(--ftp-ink);--on2:var(--ftp-muted)}
 .ftp-tabshape[data-tone="ghost"]{--c:var(--ftp-ghost);--on:var(--ftp-muted)}
-.ftp-tabshape{position:relative;display:inline-flex;align-items:center;gap:8px;height:var(--th,30px);padding:0 16px;border-radius:var(--fr,12px) var(--fr,12px) 0 0;background:var(--c);color:var(--on);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;--fr:12px}
+
+.ftp-tabshape{position:relative;display:inline-flex;align-items:center;gap:8px;height:var(--th,30px);padding:0 16px;border-radius:var(--fr,12px) var(--fr,12px) 0 0;background:var(--c);color:var(--on);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;--fr:12px;transition:all .3s ease}
 .ftp-tabshape::before,.ftp-tabshape::after{content:"";position:absolute;bottom:0;width:var(--fr);height:var(--fr);transition:opacity .25s}
 .ftp-tabshape::before{right:100%;background:radial-gradient(circle at 0 0,transparent calc(var(--fr) - .5px),var(--c) var(--fr))}
 .ftp-tabshape::after{left:100%;background:radial-gradient(circle at 100% 0,transparent calc(var(--fr) - .5px),var(--c) var(--fr))}
 .ftp-tabshape[data-flush="left"]::before,.ftp-tabshape[data-flush="right"]::after{display:none}
+
+.ftp-root[data-theme="dark"] .ftp-tabshape{background:linear-gradient(to bottom,color-mix(in srgb,var(--c) 44%,rgba(255,255,255,.15)),color-mix(in srgb,var(--c) 25%,rgba(13,19,36,.85)));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid color-mix(in srgb,var(--c) 65%,rgba(255,255,255,.3));border-left:1px solid color-mix(in srgb,var(--c) 45%,rgba(255,255,255,.18));border-right:1px solid color-mix(in srgb,var(--c) 45%,rgba(255,255,255,.18));box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.ftp-root[data-theme="dark"] .ftp-tabshape::before{right:100%;background:radial-gradient(circle at 0 0,transparent calc(var(--fr) - .5px),color-mix(in srgb,var(--c) 30%,rgba(13,19,36,.85)) var(--fr))}
+.ftp-root[data-theme="dark"] .ftp-tabshape::after{left:100%;background:radial-gradient(circle at 100% 0,transparent calc(var(--fr) - .5px),color-mix(in srgb,var(--c) 30%,rgba(13,19,36,.85)) var(--fr))}
+
 .ftp-ftab{position:absolute;top:0;left:calc(var(--fr) + var(--tx,0) * (100% - var(--fr) * 2));transform:translateX(calc(var(--tx,0) * -100%))}
 .ftp-ftab[data-flush="left"]{left:0;transform:none}
 .ftp-ftab[data-flush="right"]{left:auto;right:0;transform:none}
-.ftp-fbody{position:relative;border-radius:var(--br);background:var(--c);color:var(--on)}
+
+/* Universal Folder Body Glassmorphism */
+.ftp-fbody{position:relative;border-radius:var(--br);background:var(--c);color:var(--on);transition:all .35s ease}
 .ftp-folder[data-flush="left"]>.ftp-fbody{border-top-left-radius:0}
 .ftp-folder[data-flush="right"]>.ftp-fbody{border-top-right-radius:0}
-.ftp-folder[data-glass="true"]>.ftp-fbody{background:linear-gradient(var(--c) 0,var(--c) 3px,color-mix(in srgb,var(--c) 58%,transparent) 46px,color-mix(in srgb,var(--c) 40%,transparent));backdrop-filter:blur(14px) saturate(1.35);-webkit-backdrop-filter:blur(14px) saturate(1.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+
+.ftp-root[data-theme="dark"] .ftp-folder>.ftp-fbody{background:linear-gradient(140deg,color-mix(in srgb,var(--c) 28%,rgba(255,255,255,.06)),color-mix(in srgb,var(--c) 14%,rgba(10,15,28,.72)));backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border:1px solid color-mix(in srgb,var(--c) 45%,rgba(255,255,255,.16));box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(0,0,0,.35),0 18px 40px -14px rgba(0,0,0,.55)}
+.ftp-folder[data-glass="true"]>.ftp-fbody{background:linear-gradient(var(--c) 0,var(--c) 3px,color-mix(in srgb,var(--c) 58%,transparent) 46px,color-mix(in srgb,var(--c) 40%,transparent));backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+
 .ftp-tchip{display:inline-flex;align-items:center;height:16px;padding:0 6px;border-radius:99px;border:1.2px solid currentColor;font-size:9.5px;letter-spacing:.04em;opacity:.9}
 
 .ftp-st{display:block;overflow:visible}
@@ -400,21 +440,24 @@ const FTP_CSS = `
 
 .ftp-mast{position:relative;z-index:2}
 .ftp-mast-strip{height:14px;background:var(--ftp-blue)}
+.ftp-root[data-theme="dark"] .ftp-mast-strip{background:linear-gradient(90deg,#3b82f6,#8b5cf6,#10b981)}
 .ftp-mast-row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
 .ftp-mast-tab{position:relative;display:flex;align-items:center;gap:6px;padding:14px 34px 20px 22px;background:var(--ftp-blue);color:#fff;border-bottom-right-radius:34px}
+.ftp-root[data-theme="dark"] .ftp-mast-tab{background:linear-gradient(135deg,rgba(59,130,246,.95),rgba(37,99,235,.85));backdrop-filter:blur(16px);box-shadow:0 12px 30px -10px rgba(59,130,246,.5),inset 0 1px 0 rgba(255,255,255,.3)}
 .ftp-mast-tab::after{content:"";position:absolute;top:0;left:100%;width:34px;height:34px;background:radial-gradient(circle at 100% 100%,transparent 33.5px,var(--ftp-blue) 34px)}
+.ftp-root[data-theme="dark"] .ftp-mast-tab::after{background:radial-gradient(circle at 100% 100%,transparent 33.5px,rgba(37,99,235,.85) 34px)}
 .ftp-mast-tab .ftp-st{height:clamp(26px,4.2vw,46px);width:auto}
 .ftp-reg{align-self:flex-start;margin-top:2px;font-size:13px;font-weight:700}
 .ftp-mast-notes{display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:6px 14px;padding:24px 24px 0 0;font-size:clamp(14px,1.7vw,20px);color:var(--ftp-blue);letter-spacing:.06em}
 .ftp-mast-notes i{width:1.5px;height:16px;background:var(--ftp-blue);opacity:.6}
 
 .ftp-navwrap{position:sticky;top:12px;z-index:40;display:flex;justify-content:center;padding:18px 16px 0;pointer-events:none}
-.ftp-nav{pointer-events:auto;display:flex;align-items:center;gap:4px;max-width:100%;padding:5px;border-radius:16px;border:1px solid var(--ftp-line);background:var(--ftp-glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);box-shadow:var(--ftp-shadow)}
+.ftp-nav{pointer-events:auto;display:flex;align-items:center;gap:4px;max-width:100%;padding:6px;border-radius:20px;border:1px solid rgba(255,255,255,.12);background:var(--ftp-glass);backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);box-shadow:0 16px 38px -10px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.18)}
 .ftp-count{display:flex;align-items:baseline;gap:3px;padding:0 10px 0 8px;font-size:12px;font-weight:700;color:var(--ftp-blue);font-variant-numeric:tabular-nums;letter-spacing:.04em}
 .ftp-count small{font-size:10px;color:var(--ftp-muted);font-weight:600}
 .ftp-links{position:relative;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
 .ftp-links::-webkit-scrollbar{display:none}
-.ftp-ind{position:absolute;left:0;top:0;bottom:0;border-radius:11px;background:var(--ftp-blue);transition:transform .5s cubic-bezier(.3,1.25,.4,1),width .5s cubic-bezier(.3,1.25,.4,1)}
+.ftp-ind{position:absolute;left:0;top:0;bottom:0;border-radius:11px;background:var(--ftp-blue);box-shadow:0 0 16px rgba(59,130,246,.5);transition:transform .5s cubic-bezier(.3,1.25,.4,1),width .5s cubic-bezier(.3,1.25,.4,1)}
 .ftp-link{position:relative;z-index:1;height:32px;padding:0 12px;border-radius:11px;font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ftp-muted);white-space:nowrap;transition:color .25s}
 .ftp-link:hover{color:var(--ftp-ink)}
 .ftp-link[aria-current="true"]{color:#fff}
@@ -425,8 +468,11 @@ const FTP_CSS = `
 .ftp-sun-moon{transition:cx .5s cubic-bezier(.3,1.4,.5,1),cy .5s cubic-bezier(.3,1.4,.5,1)}
 .ftp-root[data-theme="dark"] .ftp-sun-rays{transform:scale(.4) rotate(45deg);opacity:0}
 
+/* Sheets with Deep Frosted Glass */
 .ftp-sheets{display:flex;flex-direction:column;gap:28px;padding:28px 0 0}
-.ftp-sheet{position:relative;scroll-margin-top:80px;border-radius:26px;background:var(--ftp-sheet);box-shadow:var(--ftp-shadow);padding:22px clamp(18px,3.4vw,44px) clamp(26px,4vw,48px);overflow:hidden;transition:background-color .4s}
+.ftp-sheet{position:relative;scroll-margin-top:80px;border-radius:26px;background:var(--ftp-sheet);box-shadow:var(--ftp-shadow);padding:22px clamp(18px,3.4vw,44px) clamp(26px,4vw,48px);overflow:hidden;transition:background-color .4s,border-color .4s,box-shadow .4s;backdrop-filter:blur(26px) saturate(1.4);-webkit-backdrop-filter:blur(26px) saturate(1.4);border:1px solid var(--ftp-line)}
+.ftp-root[data-theme="dark"] .ftp-sheet{background:rgba(14,21,37,.7);backdrop-filter:blur(32px) saturate(1.5);-webkit-backdrop-filter:blur(32px) saturate(1.5);border:1px solid rgba(255,255,255,.09);box-shadow:0 24px 64px -16px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.13),inset 0 0 30px rgba(59,130,246,.02)}
+
 .ftp-meta{display:flex;align-items:center;justify-content:space-between;gap:8px 18px;flex-wrap:wrap;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ftp-blue)}
 .ftp-meta span[data-on="true"]{color:var(--ftp-ink)}
 .ftp-meta-bar{margin:-22px calc(clamp(18px,3.4vw,44px) * -1) 0;padding:12px clamp(18px,3.4vw,44px);background:var(--ftp-green);color:#fff}
@@ -454,16 +500,19 @@ const FTP_CSS = `
 .ftp-sub span,.ftp-sub b{display:block;white-space:normal;overflow-wrap:break-word}
 .ftp-sub b{font-weight:700;color:var(--ftp-blue)}
 .ftp-sub-sig{display:none}
-.ftp-pill{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 6px 0 18px;border-radius:12px;background:var(--ftp-blue);color:#fff;font-size:clamp(14px,1.6vw,18px);font-weight:600;letter-spacing:.04em}
+.ftp-pill{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 6px 0 18px;border-radius:12px;background:var(--ftp-blue);color:#fff;font-size:clamp(14px,1.6vw,18px);font-weight:600;letter-spacing:.04em;transition:all .3s ease}
+.ftp-root[data-theme="dark"] .ftp-pill{background:linear-gradient(135deg,rgba(59,130,246,.85),rgba(37,99,235,.7));backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);box-shadow:0 8px 24px -6px rgba(59,130,246,.5),inset 0 1px 0 rgba(255,255,255,.3)}
 .ftp-pill-arrow{width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18);transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
 .ftp-pill:hover .ftp-pill-arrow{transform:rotate(-45deg)}
 .ftp-qlinks{display:flex;flex-wrap:wrap;gap:6px 14px;margin:14px 0 10px}
-.ftp-qlink{font-size:13px;color:var(--ftp-blue);letter-spacing:.02em;transition:transform .25s}
-.ftp-qlink:hover{transform:translateY(-2px)}
+.ftp-qlink{font-size:13px;color:var(--ftp-blue);letter-spacing:.02em;transition:transform .25s,color .25s}
+.ftp-root[data-theme="dark"] .ftp-qlink{color:#60a5fa}
+.ftp-qlink:hover{transform:translateY(-2px);color:#93c5fd}
 .ftp-qlink::before{content:"("}
 .ftp-qlink::after{content:")"}
 .ftp-blurb{font-size:12px;color:var(--ftp-muted);line-height:1.6;max-width:420px}
 
+/* Cover Deck Folders */
 .ftp-deck{position:relative;height:var(--dh,262px);margin:clamp(22px,3vw,34px) calc(clamp(18px,3.4vw,44px) * -1) 0;overflow:hidden}
 .ftp-dfold{position:absolute;left:calc(var(--l) * 1%);width:calc(var(--w) * 1%);top:var(--t);transition:transform .55s cubic-bezier(.3,1.3,.4,1)}
 .ftp-dfold>.ftp-fbody{height:320px;padding:18px 22px}
@@ -479,12 +528,15 @@ const FTP_CSS = `
 .ftp-dfold .ftp-tabshape svg{transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
 .ftp-dfold:hover .ftp-tabshape svg{transform:translateX(3px)}
 
+/* Catalog Band Folders */
 .ftp-band-list{position:relative;padding-top:6px}
-.ftp-band{position:relative;margin-top:-16px;filter:drop-shadow(0 -1px 0 var(--ftp-line)) drop-shadow(0 -8px 14px rgba(27,34,52,.07))}
+.ftp-band{position:relative;margin-top:-16px;filter:drop-shadow(0 -1px 0 var(--ftp-line)) drop-shadow(0 -8px 14px rgba(27,34,52,.07));transition:transform .35s ease}
 .ftp-root[data-theme="dark"] .ftp-band{filter:drop-shadow(0 -1px 0 var(--ftp-line)) drop-shadow(0 -8px 16px rgba(0,0,0,.35))}
+.ftp-root[data-theme="dark"] .ftp-band:hover{transform:translateY(-3px);z-index:5}
 .ftp-band:first-child{margin-top:0}
-.ftp-band>.ftp-fbody{transition:background-color .45s ease,color .45s ease}
+.ftp-band>.ftp-fbody{transition:background-color .45s ease,color .45s ease,box-shadow .4s ease,border-color .4s ease}
 .ftp-band .ftp-tabshape{transition:background-color .45s ease,color .45s ease}
+.ftp-root[data-theme="dark"] .ftp-band[data-open="true"]>.ftp-fbody{border-color:var(--ftp-blue);box-shadow:0 24px 50px -12px rgba(59,130,246,.3),inset 0 1px 0 rgba(255,255,255,.3),inset 3px 0 0 var(--ftp-blue)}
 .ftp-band-head{display:flex;width:100%;align-items:center;gap:clamp(14px,2.4vw,30px);padding:14px clamp(14px,2.4vw,28px) 20px;overflow:hidden;height:74px}
 .ftp-band[data-open="true"] .ftp-band-head{height:auto;padding-top:22px}
 .ftp-band-n{flex:none;width:30px;font-size:15px;font-weight:600;color:var(--on2);font-variant-numeric:tabular-nums}
@@ -503,24 +555,27 @@ const FTP_CSS = `
 .ftp-go{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:99px;background:var(--on);color:var(--c);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
 .ftp-go:hover{transform:translateX(4px)}
 
+/* About Page & Photo Card */
 .ftp-about{display:grid;grid-template-columns:minmax(240px,.82fr) 1.6fr;gap:clamp(20px,3.6vw,48px);align-items:start}
 .ftp-photo{perspective:900px}
 .ftp-photo>.ftp-folder{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.3,1.2,.4,1);transform-style:preserve-3d}
 .ftp-photo-body{padding:10px}
 .ftp-photo-frame{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:5/6;background:#1d2b4f}
 .ftp-photo-frame>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ftp-photo-glass{position:absolute;left:-4px;right:-4px;bottom:-4px;display:flex;align-items:flex-end;justify-content:space-between;padding:12px 16px 14px;border-radius:14px;background:var(--ftp-glass);backdrop-filter:blur(12px) saturate(1.4);-webkit-backdrop-filter:blur(12px) saturate(1.4);border:1px solid rgba(255,255,255,.35)}
+.ftp-photo-glass{position:absolute;left:-4px;right:-4px;bottom:-4px;display:flex;align-items:flex-end;justify-content:space-between;padding:12px 16px 14px;border-radius:14px;background:var(--ftp-glass);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border:1px solid rgba(255,255,255,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
 .ftp-photo-glass .ftp-st{height:26px;width:auto}
 .ftp-hi{display:flex;align-items:center;gap:12px;font-size:clamp(26px,3.6vw,44px);font-weight:600;color:var(--ftp-blue);line-height:1.1;letter-spacing:.01em}
 .ftp-hi b{font-weight:800}
 .ftp-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 26px;margin-top:26px}
-.ftp-badge{display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:8px;background:var(--c);color:var(--on);font-size:12.5px;font-weight:700;letter-spacing:.04em}
+.ftp-badge{display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:8px;background:var(--c);color:var(--on);font-size:12.5px;font-weight:700;letter-spacing:.04em;backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.15)}
 .ftp-cols ul{margin-top:10px;font-size:12.5px;line-height:1.75;color:var(--ftp-soft)}
+
+/* Work Experience Timeline */
 .ftp-tl{margin-top:30px}
 .ftp-tl-track{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
 .ftp-tl-track::before{display:none}
-.ftp-tl-item{position:relative;display:flex;flex-direction:column;padding:12px 14px;border-radius:10px;border:1px solid var(--ftp-line);background:rgba(255,255,255,.02);transition:all .25s ease;cursor:pointer}
-.ftp-tl-item[data-on="true"],.ftp-tl-item:hover{border-color:var(--ftp-blue);background:rgba(59,130,246,.08);transform:translateY(-2px);box-shadow:0 8px 20px -8px rgba(59,130,246,.25)}
+.ftp-tl-item{position:relative;display:flex;flex-direction:column;padding:14px 16px;border-radius:12px;border:1px solid var(--ftp-line);background:rgba(255,255,255,.03);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);transition:all .3s cubic-bezier(.16,1,.3,1);cursor:pointer}
+.ftp-tl-item[data-on="true"],.ftp-tl-item:hover{border-color:var(--ftp-blue);background:rgba(59,130,246,.12);transform:translateY(-3px);box-shadow:0 12px 28px -8px rgba(59,130,246,.35),inset 0 1px 0 rgba(255,255,255,.25)}
 .ftp-tl-date{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ftp-blue);margin-bottom:6px;filter:none!important;opacity:1!important}
 .ftp-tl-dot{display:none}
 .ftp-tl-title{font-size:13.5px;font-weight:700;color:var(--ftp-ink);line-height:1.35}
@@ -530,6 +585,7 @@ const FTP_CSS = `
 .ftp-contact:hover{color:var(--ftp-blue)}
 .ftp-contact i{width:20px;height:20px;border-radius:99px;display:flex;align-items:center;justify-content:center;background:var(--c);color:var(--on);font-style:normal;font-size:9px;font-weight:800}
 
+/* Work Grid & Project Cards */
 .ftp-filter{position:relative;margin-top:6px}
 .ftp-tabbar{display:flex;align-items:flex-end;gap:6px;padding:12px 30px 0;overflow-x:auto;scrollbar-width:none}
 .ftp-tabbar::-webkit-scrollbar{display:none}
@@ -538,13 +594,13 @@ const FTP_CSS = `
 .ftp-tabbtn[data-on="false"]::before,.ftp-tabbtn[data-on="false"]::after{opacity:0}
 .ftp-tabbtn[data-on="false"]:hover{transform:translateY(-8px);color:var(--ftp-ink)}
 .ftp-tabbtn .ftp-tchip{opacity:.7}
-.ftp-bar{height:8px;border-radius:6px;background:var(--c);transition:background-color .4s}
+.ftp-bar{height:8px;border-radius:6px;background:var(--c);box-shadow:0 0 14px color-mix(in srgb,var(--c) 50%,transparent);transition:background-color .4s}
 .ftp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:34px 22px;margin-top:30px}
 .ftp-card{display:block;width:100%;text-align:left;animation:ftp-in .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 60ms)}
-.ftp-card>.ftp-fbody{padding:10px 10px 14px;transition:transform .5s cubic-bezier(.3,1.3,.4,1),box-shadow .5s}
-.ftp-card .ftp-ftab{transition:transform .5s cubic-bezier(.3,1.3,.4,1)}
-.ftp-card:hover>.ftp-fbody{box-shadow:0 24px 40px -22px rgba(27,34,52,.45)}
-.ftp-card-art{position:relative;border-radius:11px;overflow:hidden;aspect-ratio:16/11;background:rgba(255,255,255,.2)}
+.ftp-card>.ftp-fbody{padding:12px 12px 16px;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s ease,border-color .4s ease}
+.ftp-card .ftp-ftab{transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.ftp-root[data-theme="dark"] .ftp-card:hover>.ftp-fbody{transform:translateY(-8px) scale(1.015);border-color:color-mix(in srgb,var(--c) 80%,rgba(255,255,255,.45));box-shadow:0 22px 48px -12px color-mix(in srgb,var(--c) 40%,rgba(0,0,0,.7)),inset 0 1px 0 rgba(255,255,255,.45),0 0 24px color-mix(in srgb,var(--c) 30%,transparent)}
+.ftp-card-art{position:relative;border-radius:11px;overflow:hidden;aspect-ratio:16/11;background:rgba(255,255,255,.1)}
 .ftp-card-art>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .ftp-card:hover .ftp-card-art>*{transform:scale(1.05)}
 .ftp-card-cap{display:flex;justify-content:space-between;gap:12px;padding:12px 6px 0}
@@ -553,22 +609,25 @@ const FTP_CSS = `
 .ftp-card-y{font-size:12px;font-weight:600;color:var(--on2);font-variant-numeric:tabular-nums}
 .ftp-empty{padding:40px 0;text-align:center;color:var(--ftp-muted);font-size:14px}
 
-.ftp-panel{position:relative;border-radius:22px;background:var(--c);color:var(--on);padding:clamp(22px,3.6vw,44px);transition:background-color .5s ease,color .5s ease}
+/* Process Methodology Panel */
+.ftp-panel{position:relative;border-radius:22px;background:var(--c);color:var(--on);padding:clamp(22px,3.6vw,44px);transition:all .5s ease}
+.ftp-root[data-theme="dark"] .ftp-panel{background:linear-gradient(140deg,color-mix(in srgb,var(--c) 26%,rgba(255,255,255,.05)),color-mix(in srgb,var(--c) 12%,rgba(10,15,28,.78)));backdrop-filter:blur(28px) saturate(1.4);-webkit-backdrop-filter:blur(28px) saturate(1.4);border:1px solid color-mix(in srgb,var(--c) 50%,rgba(255,255,255,.2));box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 24px 60px -15px rgba(0,0,0,.6)}
 .ftp-step{display:grid;grid-template-columns:1.2fr 1fr;gap:24px 48px;align-items:start;animation:ftp-in .55s cubic-bezier(.2,.8,.2,1) both}
 .ftp-step-n{font-size:clamp(56px,10vw,128px);font-weight:200;line-height:.9;letter-spacing:-.02em;color:var(--on2);font-variant-numeric:tabular-nums}
 .ftp-step-t{margin-top:10px;font-size:clamp(26px,3.6vw,44px);font-weight:800;text-transform:uppercase;letter-spacing:.02em;line-height:1}
 .ftp-step-l{margin-left:10px;font-weight:600;opacity:.75;font-size:.6em}
 .ftp-step-b{font-size:15px;line-height:1.7;color:var(--on)}
 .ftp-step-o{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.ftp-step-o li{padding:6px 12px;border-radius:99px;border:1.5px solid var(--on2);font-size:12.5px;font-weight:600}
+.ftp-step-o li{padding:6px 12px;border-radius:99px;border:1.5px solid var(--on2);font-size:12.5px;font-weight:600;background:rgba(255,255,255,.06);backdrop-filter:blur(8px)}
 .ftp-step-d{display:inline-block;margin-top:16px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--on2)}
 .ftp-step-art{width:100%;height:auto;margin-top:22px;color:var(--on)}
 .ftp-dots{display:flex;gap:6px;margin-top:22px}
 .ftp-dots span{height:4px;width:18px;border-radius:9px;background:var(--on2);opacity:.45;transition:width .4s,opacity .4s}
 .ftp-dots span[data-on="true"]{width:42px;opacity:1}
 
+/* Words / Honors Section */
 .ftp-words{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:30px 0 10px}
-.ftp-blob{position:absolute;border-radius:999px;filter:blur(2px);pointer-events:none}
+.ftp-blob{position:absolute;border-radius:999px;filter:blur(30px);pointer-events:none}
 .ftp-word{position:relative;transform:rotate(var(--rot));transition:transform .55s cubic-bezier(.3,1.3,.4,1)}
 .ftp-word:hover,.ftp-word:focus-within{transform:rotate(0deg) translateY(-10px);z-index:3}
 .ftp-word>.ftp-fbody{min-height:230px;padding:22px 22px 20px;display:flex;flex-direction:column;justify-content:space-between;gap:22px}
@@ -577,10 +636,12 @@ const FTP_CSS = `
 .ftp-word figcaption{font-size:12.5px;color:var(--on2)}
 .ftp-word figcaption b{display:block;font-size:14px;color:var(--on)}
 
+/* Contact Stack */
 .ftp-stack{position:relative;margin-top:8px}
 .ftp-stack>.ftp-folder{margin-top:-20px}
 .ftp-stack>.ftp-folder:first-child{margin-top:0}
 .ftp-stack .ftp-fbody{padding:clamp(20px,3vw,36px) clamp(20px,3.4vw,42px)}
+.ftp-root[data-theme="dark"] .ftp-stack .ftp-folder>.ftp-fbody{box-shadow:0 20px 45px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.2)}
 .ftp-talk{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
 .ftp-talk .ftp-st{height:clamp(44px,8.4vw,108px);width:auto;max-width:100%}
 .ftp-talk p{max-width:320px;font-size:14px;color:var(--on2)}
@@ -588,18 +649,21 @@ const FTP_CSS = `
 .ftp-mail-a{font-size:clamp(18px,2.4vw,34px);font-weight:700;letter-spacing:.01em;color:var(--on);max-width:100%;word-break:break-word;overflow-wrap:anywhere;background-image:linear-gradient(currentColor,currentColor);background-size:0 3px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .45s cubic-bezier(.2,.8,.2,1)}
 .ftp-mail-a:hover{background-size:100% 3px}
 .ftp-btns{display:flex;gap:10px;flex-shrink:0}
-.ftp-btn{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 18px;border-radius:12px;background:var(--on);color:var(--c);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+.ftp-btn{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 18px;border-radius:12px;background:var(--on);color:var(--c);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:transform .3s cubic-bezier(.3,1.5,.5,1),box-shadow .3s ease}
 .ftp-btn[data-ghost="true"]{background:transparent;color:var(--on);box-shadow:inset 0 0 0 1.5px var(--on2)}
-.ftp-btn:hover{transform:translateY(-2px)}
+.ftp-btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px -4px rgba(0,0,0,.4)}
 .ftp-btn:active{transform:scale(.97)}
+
+/* Else / Profile Links Cards */
 .ftp-else{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.ftp-else a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:12px;background:var(--ftp-ghost);color:var(--ftp-ink);min-width:0;overflow:hidden;transition:background-color .25s,color .25s}
-.ftp-else a:hover{background:var(--ftp-blue);color:#fff}
+.ftp-else a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:14px;background:rgba(255,255,255,.04);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);color:var(--ftp-ink);min-width:0;overflow:hidden;transition:all .28s cubic-bezier(.16,1,.3,1)}
+.ftp-else a:hover{background:var(--ftp-blue);color:#fff;border-color:rgba(255,255,255,.3);transform:translateY(-2px);box-shadow:0 10px 24px -6px rgba(59,130,246,.4)}
 .ftp-else a>span{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:600}
 .ftp-else small{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:3px;font-weight:700}
 .ftp-else svg{flex-shrink:0;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
 .ftp-else a:hover svg{transform:translate(2px,-2px)}
 
+/* Footer */
 .ftp-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding:34px 4px 40px;color:var(--ftp-blue);font-size:clamp(15px,1.8vw,20px);letter-spacing:.06em;text-transform:uppercase}
 .ftp-foot small{display:block;font-size:11px;letter-spacing:.1em;color:var(--ftp-muted)}
 .ftp-foot-n{font-size:clamp(22px,2.8vw,34px);font-weight:300;font-variant-numeric:tabular-nums}
@@ -609,11 +673,12 @@ const FTP_CSS = `
 .ftp-clock i{width:7px;height:7px;border-radius:9px;background:var(--ftp-faint)}
 .ftp-clock i[data-day="true"]{background:var(--ftp-orange)}
 
-.ftp-overlay{position:fixed;inset:0;z-index:80;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px 40px;background:rgba(11,15,28,.42);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:ftp-fade .25s ease both}
+/* Modal Dialog with Deep Frosted Glass */
+.ftp-overlay{position:fixed;inset:0;z-index:80;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px 40px;background:rgba(5,8,18,.7);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);animation:ftp-fade .25s ease both}
 .ftp-modal{width:100%;max-width:980px;animation:ftp-up .5s cubic-bezier(.2,.9,.25,1.05) both}
-.ftp-modal>.ftp-fbody{padding:14px;box-shadow:0 40px 90px -30px rgba(0,0,0,.6)}
+.ftp-modal>.ftp-fbody{padding:18px;border-radius:24px;box-shadow:0 40px 100px -20px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.3)}
 .ftp-modal-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:6px}
-.ftp-modal-art{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/11;background:rgba(255,255,255,.2)}
+.ftp-modal-art{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/11;background:rgba(255,255,255,.1)}
 .ftp-modal-art>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ftp-modal-info{display:flex;flex-direction:column;gap:14px;padding:12px 14px 6px 22px;color:var(--on)}
 .ftp-modal-t{font-size:clamp(22px,2.6vw,30px);font-weight:800;line-height:1.15}
@@ -650,6 +715,8 @@ const FTP_CSS = `
 .ftp-band-pts{display:none}
 }
 @media (max-width:720px){
+.ftp-hud-sep{display:none}
+.ftp-hud-bar{gap:8px 14px}
 .ftp-mast-notes{display:none}
 .ftp-cover-mid{grid-template-columns:1fr}
 .ftp-sub{font-size:clamp(22px,6.5vw,36px);line-height:1.15}
@@ -1518,6 +1585,13 @@ export default function FolderTabPortfolioTemplate({
     photoRef.current?.style.setProperty("--rx", "0deg")
   }
 
+  const onRootPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = rootRef.current
+    if (!el || e.pointerType !== "mouse") return
+    el.style.setProperty("--mx", `${e.clientX}px`)
+    el.style.setProperty("--my", `${e.clientY}px`)
+  }
+
   const rootStyle = {
     minHeight: height,
     "--ftp-blue": palette.blue,
@@ -1573,8 +1647,26 @@ export default function FolderTabPortfolioTemplate({
   const stepTone = (i: number): FolderTone => TONES[i % TONES.length]
 
   return (
-    <div ref={rootRef} className={"ftp-root" + (className ? " " + className : "")} data-theme={theme} style={rootStyle}>
+    <div
+      ref={rootRef}
+      className={"ftp-root" + (className ? " " + className : "")}
+      data-theme={theme}
+      style={rootStyle}
+      onPointerMove={onRootPointerMove}
+    >
       <style>{FTP_CSS}</style>
+
+      {/* Dynamic Cyber Backdrop with Aurora Orbs and Interactive Spotlight */}
+      <div className="ftp-backdrop" aria-hidden="true">
+        <div className="ftp-spotlight" />
+        <div className="ftp-grid-bg" />
+        <div className="ftp-aurora-wrap">
+          <div className="ftp-aurora-orb ftp-aurora-1" />
+          <div className="ftp-aurora-orb ftp-aurora-2" />
+          <div className="ftp-aurora-orb ftp-aurora-3" />
+          <div className="ftp-aurora-orb ftp-aurora-4" />
+        </div>
+      </div>
 
       {/* masthead */}
       <header className="ftp-mast">
@@ -1629,6 +1721,30 @@ export default function FolderTabPortfolioTemplate({
         {/* cover */}
         <section className="ftp-sheet ftp-cover" {...sheetProps("cover")}>
           {meta("cover", true)}
+
+          {/* Tactical HUD Telemetry Ribbon */}
+          <div className="ftp-hud-bar" aria-label="System status telemetry">
+            <div className="ftp-hud-item">
+              <span className="ftp-hud-pulse" />
+              <span className="ftp-hud-label">CLUSTER STATUS:</span>
+              <span className="ftp-hud-val ftp-hud-green">ONLINE [AWS ECS]</span>
+            </div>
+            <div className="ftp-hud-sep" />
+            <div className="ftp-hud-item">
+              <span className="ftp-hud-label">P95 LATENCY:</span>
+              <span className="ftp-hud-val ftp-hud-blue">4.2ms @ 3,450 req/s</span>
+            </div>
+            <div className="ftp-hud-sep" />
+            <div className="ftp-hud-item">
+              <span className="ftp-hud-label">CACHE HIT:</span>
+              <span className="ftp-hud-val ftp-hud-cyan">99.4% [REDIS]</span>
+            </div>
+            <div className="ftp-hud-sep" />
+            <div className="ftp-hud-item">
+              <span className="ftp-hud-label">AI INFERENCE:</span>
+              <span className="ftp-hud-val ftp-hud-orange">SSE STREAMING (&lt;400ms)</span>
+            </div>
+          </div>
           <div className="ftp-cover-top">
             <Palm className="ftp-palm" />
             <span className="ftp-plus" style={{ left: -14, top: 8 }} />
@@ -1667,7 +1783,7 @@ export default function FolderTabPortfolioTemplate({
                   key={c.id}
                   as="button"
                   tone={c.tone}
-                  glass={slot.t > 40}
+                  glass
                   tabAt={slot.tab}
                   className="ftp-dfold ftp-dfold-btn"
                   style={{ "--l": slot.l, "--w": slot.w, "--t": slot.t + "px", "--mt": i * 54 + "px" } as Vars}
@@ -1708,6 +1824,7 @@ export default function FolderTabPortfolioTemplate({
                   <Folder
                     key={ch.title + i}
                     tone={open ? "blue" : "sheet"}
+                    glass
                     tabAt={slot}
                     className="ftp-band"
                     data-open={open ? "true" : "false"}
@@ -1757,7 +1874,7 @@ export default function FolderTabPortfolioTemplate({
           {head("about", "#" + firstName, "About me", { local: "PROFILE" })}
           <div className="ftp-about">
             <div className="ftp-photo" ref={photoRef} onPointerMove={onPhotoMove} onPointerLeave={onPhotoLeave}>
-              <Folder tone="blue" tabAt={0.08} tab={initialsOf(name) + " · " + handle.replace(/^@/, "").split(".")[0]} bodyClass="ftp-photo-body">
+              <Folder tone="blue" glass tabAt={0.08} tab={initialsOf(name) + " · " + handle.replace(/^@/, "").split(".")[0]} bodyClass="ftp-photo-body">
                 <div className="ftp-photo-frame">
                   {typeof photo === "string" ? (
                     <img src={photo} alt={name} width={300} height={360} style={{ maxWidth: "none" }} />
@@ -1862,6 +1979,7 @@ export default function FolderTabPortfolioTemplate({
                     key={p.title + i}
                     as="button"
                     tone={tone}
+                    glass
                     tabAt={(k * 0.37) % 1 > 0.85 ? 0.85 : (k * 0.37) % 1}
                     className="ftp-card"
                     style={{ "--i": k } as Vars}
@@ -1986,13 +2104,13 @@ export default function FolderTabPortfolioTemplate({
           {meta("contact")}
           {head("contact", "(:)", "Contact & Connect", { local: "COLLABORATION" })}
           <div className="ftp-stack">
-            <Folder tone="blue" tabAt={0.78} tab={<>Reflections <Arrow size={12} /></>}>
+            <Folder tone="blue" glass tabAt={0.78} tab={<>Reflections <Arrow size={12} /></>}>
               <div className="ftp-talk">
                 <StrokeText text="Let's build :)" weight={15} tracking={22} color="#ffffff" label="Let's build" />
                 <p>Open to software engineering roles, high-concurrency architecture challenges, and frontier AI systems. Inquiries, discussions, and coffee chats are always welcome.</p>
               </div>
             </Folder>
-            <Folder tone="green" tabAt={0.56} tab={<>Direct Mail <Arrow size={12} /></>}>
+            <Folder tone="green" glass tabAt={0.56} tab={<>Direct Mail <Arrow size={12} /></>}>
               <div className="ftp-mail">
                 <a className="ftp-mail-a" href={"mailto:" + email}>
                   {email}
@@ -2008,7 +2126,7 @@ export default function FolderTabPortfolioTemplate({
               </div>
             </Folder>
             {contacts.length > 0 && (
-              <Folder tone="sheet" tabAt={0.3} tab={<>Profiles & Links <Arrow size={12} /></>} style={{ filter: "drop-shadow(0 -6px 14px rgba(27,34,52,.08))" }}>
+              <Folder tone="sheet" glass tabAt={0.3} tab={<>Profiles & Links <Arrow size={12} /></>} style={{ filter: "drop-shadow(0 -6px 14px rgba(27,34,52,.08))" }}>
                 <div className="ftp-else">
                   {contacts.map((c) => (
                     <a key={c.label} href={c.href || "#"} target={c.href ? "_blank" : undefined} rel="noreferrer">
@@ -2051,6 +2169,7 @@ export default function FolderTabPortfolioTemplate({
         <div className="ftp-overlay" onClick={(e) => e.target === e.currentTarget && closeProject()}>
           <Folder
             tone={toneOf(project.category)}
+            glass
             tabAt={0.04}
             className="ftp-modal"
             role="dialog"

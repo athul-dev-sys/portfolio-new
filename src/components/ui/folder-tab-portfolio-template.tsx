@@ -89,6 +89,8 @@ export interface FolderTabPortfolioTemplateProps {
   contacts?: FolderLink[]
   /** IANA zone for the footer clock. */
   timeZone?: string
+  /** City or location name displayed next to the clock. */
+  location?: string
   /** Override any folder colour. */
   colors?: Partial<Record<FolderTone, string>>
   /** Join "OO" into one pill, as in PORTF◯◯LIO. */
@@ -164,104 +166,6 @@ const DEFAULT_CONTACTS: FolderLink[] = [
   { label: "Dribbble", value: "dribbble.com/aoilin", href: "https://dribbble.com" },
 ]
 // #endregion content
-
-// #region type
-// A monoline geometric alphabet, wide and round. Cap height is 100 units; each
-// glyph is an SVG path drawn with a round-capped stroke, so the weight is a
-// prop rather than a font file. Lower case is set in capitals.
-type Glyph = { w: number; d: string }
-
-const GLYPHS: Record<string, Glyph> = {
-  A: { w: 120, d: "M0 100 L60 0 L120 100 M22 64 H98" },
-  B: { w: 99, d: "M0 0 V100 M0 0 H68 A25 25 0 0 1 68 50 H0 M0 50 H74 A25 25 0 0 1 74 100 H0" },
-  C: { w: 118, d: "M109.5 17.9 A62 50 0 1 0 109.5 82.1" },
-  D: { w: 104, d: "M0 0 V100 M0 0 H52 A52 50 0 0 1 52 100 H0" },
-  E: { w: 100, d: "M100 0 H0 V100 H100 M0 50 H86" },
-  F: { w: 100, d: "M100 0 H0 V100 M0 50 H86" },
-  G: { w: 124, d: "M109.5 17.9 A62 50 0 1 0 124 50 H72" },
-  H: { w: 110, d: "M0 0 V100 M110 0 V100 M0 50 H110" },
-  I: { w: 0, d: "M0 0 V100" },
-  J: { w: 90, d: "M90 0 V58 A42 42 0 0 1 6 58" },
-  K: { w: 108, d: "M0 0 V100 M104 0 L0 60 M34 40 L108 100" },
-  L: { w: 92, d: "M0 0 V100 H92" },
-  M: { w: 132, d: "M0 100 V0 L66 70 L132 0 V100" },
-  N: { w: 110, d: "M0 100 V0 L110 100 V0" },
-  O: { w: 124, d: "M62 0 A62 50 0 1 1 62 100 A62 50 0 1 1 62 0" },
-  P: { w: 97, d: "M0 100 V0 H70 A27 27 0 0 1 70 54 H0" },
-  Q: { w: 124, d: "M62 0 A62 50 0 1 1 62 100 A62 50 0 1 1 62 0 M84 74 L124 104" },
-  R: { w: 104, d: "M0 100 V0 H70 A27 27 0 0 1 70 54 H0 M60 54 L104 100" },
-  S: { w: 116, d: "M112 18 C100 4 80 0 60 0 H52 C24 0 4 10 4 27 C4 44 22 50 56 50 H64 C98 50 116 58 116 74 C116 90 96 100 64 100 H54 C32 100 12 94 0 80" },
-  T: { w: 116, d: "M0 0 H116 M58 0 V100" },
-  U: { w: 110, d: "M0 0 V50 A55 50 0 0 0 110 50 V0" },
-  V: { w: 120, d: "M0 0 L60 100 L120 0" },
-  W: { w: 160, d: "M0 0 L40 100 L80 20 L120 100 L160 0" },
-  X: { w: 112, d: "M0 0 L112 100 M112 0 L0 100" },
-  Y: { w: 116, d: "M0 0 L58 52 L116 0 M58 52 V100" },
-  Z: { w: 114, d: "M4 0 H112 L0 100 H114" },
-  "0": { w: 92, d: "M46 0 A46 50 0 1 1 46 100 A46 50 0 1 1 46 0" },
-  "1": { w: 44, d: "M6 22 L44 0 V100" },
-  "2": { w: 100, d: "M2 26 C6 8 26 0 50 0 C78 0 98 10 98 28 C98 50 70 56 40 70 C16 81 2 90 0 100 H100" },
-  "3": { w: 100, d: "M4 10 C16 3 32 0 50 0 C78 0 96 10 96 26 C96 42 78 48 48 48 M48 48 C82 48 100 58 100 74 C100 92 80 100 50 100 C30 100 12 96 0 88" },
-  "4": { w: 108, d: "M78 100 V0 L0 70 H108" },
-  "5": { w: 100, d: "M96 0 H12 L6 46 C20 40 34 38 52 38 C82 38 100 50 100 69 C100 88 80 100 52 100 C30 100 12 96 0 88" },
-  "6": { w: 102, d: "M88 6 C76 2 64 0 52 0 C20 0 0 22 0 52 C0 80 22 100 52 100 C82 100 102 86 102 66 C102 46 82 34 54 34 C30 34 8 44 0 58" },
-  "7": { w: 104, d: "M0 0 H104 L40 100" },
-  "8": { w: 100, d: "M50 0 A44 23 0 1 1 50 46 A44 23 0 1 1 50 0 M50 46 A50 27 0 1 1 50 100 A50 27 0 1 1 50 46" },
-  "9": { w: 102, d: "M14 94 C26 98 38 100 50 100 C82 100 102 78 102 48 C102 20 80 0 50 0 C20 0 0 14 0 34 C0 54 20 66 48 66 C72 66 94 56 102 42" },
-  "#": { w: 96, d: "M34 6 L22 94 M78 6 L66 94 M6 34 H96 M0 66 H90" },
-  "-": { w: 48, d: "M0 56 H48" },
-  "–": { w: 64, d: "M0 56 H64" },
-  ".": { w: 0, d: "M0 99.5 L0 100" },
-  ",": { w: 6, d: "M6 96 L0 112" },
-  ":": { w: 0, d: "M0 44 L0 44.5 M0 99.5 L0 100" },
-  "'": { w: 0, d: "M0 0 V24" },
-  "’": { w: 0, d: "M0 0 V24" },
-  "/": { w: 70, d: "M70 -4 L0 104" },
-  "+": { w: 76, d: "M0 50 H76 M38 12 V88" },
-  "(": { w: 32, d: "M32 -8 Q-12 50 32 108" },
-  ")": { w: 32, d: "M0 -8 Q44 50 0 108" },
-  "!": { w: 0, d: "M0 0 V70 M0 99.5 V100" },
-  "?": { w: 92, d: "M0 24 C4 8 22 0 46 0 C74 0 92 10 92 28 C92 48 50 50 50 72 M50 99.5 V100" },
-  "&": { w: 104, d: "M100 100 L22 30 C10 18 18 0 42 0 C64 0 72 16 60 28 L14 62 C2 72 4 100 42 100 C66 100 84 88 98 66" },
-}
-const SPACE = 52
-const LIGATURES: Record<string, Glyph> = {
-  OO: { w: 210, d: "M50 0 H160 A50 50 0 0 1 160 100 H50 A50 50 0 0 1 50 0" },
-}
-
-type Placed = { ch: string; x: number; d: string }
-
-// Lays a string out left to right. Unknown characters become a space, so a
-// wordmark never throws on an accent or an emoji, it just leaves a gap.
-function layoutText(text: string, tracking: number, ligatures: boolean): { items: Placed[]; width: number } {
-  const chars = [...text.toUpperCase()]
-  const items: Placed[] = []
-  let x = 0
-  for (let i = 0; i < chars.length; i++) {
-    const pair = chars[i] + (chars[i + 1] ?? "")
-    if (ligatures && LIGATURES[pair]) {
-      items.push({ ch: pair, x, d: LIGATURES[pair].d })
-      x += LIGATURES[pair].w + tracking
-      i++
-      continue
-    }
-    const g = GLYPHS[chars[i]]
-    if (!g) {
-      x += SPACE
-      continue
-    }
-    items.push({ ch: chars[i], x, d: g.d })
-    x += g.w + tracking
-  }
-  const width = Math.max(0, items.length ? x - tracking : 0)
-  return { items, width }
-}
-
-// Each "M" starts its own <path>, so the draw-on dash runs per stroke.
-function splitSubpaths(d: string): string[] {
-  return d.split(/(?=M)/).map((s) => s.trim()).filter(Boolean)
-}
-// #endregion type
 
 // #region sign
 // A seeded PRNG and a string hash, so generated art is stable per input.
@@ -356,7 +260,7 @@ const SECTIONS: { id: FolderSectionId; label: string; page: string }[] = [
 ]
 
 const FTP_CSS = `
-.ftp-root{--ftp-bg:#eef0f4;--ftp-sheet:#ffffff;--ftp-ink:#1b2234;--ftp-soft:#4a5268;--ftp-muted:#8a91a3;--ftp-faint:#c6cad5;--ftp-line:#e3e6ed;--ftp-ghost:#e6e9f0;--ftp-glass:rgba(255,255,255,.62);--ftp-shadow:0 1px 2px rgba(27,34,52,.05),0 18px 40px -24px rgba(27,34,52,.28);position:relative;isolation:isolate;overflow-x:clip;background:var(--ftp-bg);color:var(--ftp-ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Hiragino Sans","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;transition:background-color .4s ease,color .4s ease}
+.ftp-root{--ftp-bg:#eef0f4;--ftp-sheet:#ffffff;--ftp-ink:#1b2234;--ftp-soft:#4a5268;--ftp-muted:#8a91a3;--ftp-faint:#c6cad5;--ftp-line:#e3e6ed;--ftp-ghost:#e6e9f0;--ftp-glass:rgba(255,255,255,.62);--ftp-shadow:0 1px 2px rgba(27,34,52,.05),0 18px 40px -24px rgba(27,34,52,.28);position:relative;isolation:isolate;overflow-x:clip;background:var(--ftp-bg);color:var(--ftp-ink);font-family:'Plus Jakarta Sans','Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;letter-spacing:-.01em;transition:background-color .4s ease,color .4s ease}
 .ftp-root[data-theme="dark"]{--ftp-bg:#070a14;--ftp-sheet:rgba(14,21,37,.72);--ftp-ink:#f1f5f9;--ftp-soft:#cbd5e1;--ftp-muted:#94a3b8;--ftp-faint:#334155;--ftp-line:rgba(255,255,255,.1);--ftp-ghost:rgba(30,41,59,.55);--ftp-glass:rgba(15,23,42,.75);--ftp-shadow:0 24px 60px -15px rgba(0,0,0,.7),0 0 1px 1px rgba(255,255,255,.08)}
 .ftp-root ::selection{background:var(--ftp-blue);color:#fff}
 .ftp-root :focus-visible{outline:2px solid var(--ftp-blue);outline-offset:3px;border-radius:8px}
@@ -442,11 +346,12 @@ const FTP_CSS = `
 .ftp-mast-strip{height:14px;background:var(--ftp-blue)}
 .ftp-root[data-theme="dark"] .ftp-mast-strip{background:linear-gradient(90deg,#3b82f6,#8b5cf6,#10b981)}
 .ftp-mast-row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
-.ftp-mast-tab{position:relative;display:flex;align-items:center;gap:6px;padding:14px 34px 20px 22px;background:var(--ftp-blue);color:#fff;border-bottom-right-radius:34px}
+.ftp-mast-tab{position:relative;display:flex;align-items:center;gap:8px;padding:14px 34px 20px 22px;background:var(--ftp-blue);color:#fff;border-bottom-right-radius:34px}
 .ftp-root[data-theme="dark"] .ftp-mast-tab{background:linear-gradient(135deg,rgba(59,130,246,.95),rgba(37,99,235,.85));backdrop-filter:blur(16px);box-shadow:0 12px 30px -10px rgba(59,130,246,.5),inset 0 1px 0 rgba(255,255,255,.3)}
 .ftp-mast-tab::after{content:"";position:absolute;top:0;left:100%;width:34px;height:34px;background:radial-gradient(circle at 100% 100%,transparent 33.5px,var(--ftp-blue) 34px)}
 .ftp-root[data-theme="dark"] .ftp-mast-tab::after{background:radial-gradient(circle at 100% 100%,transparent 33.5px,rgba(37,99,235,.85) 34px)}
-.ftp-mast-tab .ftp-st{height:clamp(26px,4.2vw,46px);width:auto}
+.ftp-mast-word{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(20px,3vw,34px);font-weight:900;letter-spacing:-.02em;text-transform:uppercase;color:#fff;line-height:1}
+.ftp-mast-tab .ftp-st{height:auto;width:auto}
 .ftp-reg{align-self:flex-start;margin-top:2px;font-size:13px;font-weight:700}
 .ftp-mast-notes{display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:6px 14px;padding:24px 24px 0 0;font-size:clamp(14px,1.7vw,20px);color:var(--ftp-blue);letter-spacing:.06em}
 .ftp-mast-notes i{width:1.5px;height:16px;background:var(--ftp-blue);opacity:.6}
@@ -483,22 +388,26 @@ const FTP_CSS = `
 .ftp-plus::after{top:6px;left:0;height:1.4px;width:13px}
 
 .ftp-head{position:relative;margin:30px 0 26px}
-.ftp-head-tag{position:absolute;left:4px;top:-8px;height:clamp(22px,3vw,34px);width:auto;opacity:.9}
-.ftp-head-word{position:relative;height:clamp(40px,7.4vw,92px);width:auto;max-width:100%;margin-top:14px}
+.ftp-head-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ftp-blue);margin-bottom:6px}
+.ftp-head-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(30px,4.5vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin:6px 0 0;background:linear-gradient(135deg,#ffffff 30%,#94a3b8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ftp-root[data-theme="light"] .ftp-head-title{background:linear-gradient(135deg,#0f172a 30%,#334155 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .ftp-head-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px 24px}
-.ftp-head-local{font-size:clamp(20px,3.2vw,36px);font-weight:800;color:var(--ftp-blue);letter-spacing:.08em;line-height:1;text-transform:uppercase}
+.ftp-head-local{font-family:'JetBrains Mono',monospace;font-size:clamp(13px,1.8vw,20px);font-weight:700;color:var(--ftp-blue);letter-spacing:.08em;line-height:1;text-transform:uppercase}
 .ftp-head-sig{display:none}
-.ftp-kicker{font-size:13.5px;color:var(--ftp-muted);max-width:540px;line-height:1.6}
+.ftp-kicker{font-size:14px;color:var(--ftp-muted);max-width:560px;line-height:1.6}
 
 .ftp-cover{padding-bottom:0}
 .ftp-cover-top{position:relative;margin-top:22px}
 .ftp-palm{position:absolute;right:-6%;top:-18%;width:min(62%,640px);height:auto;color:var(--ftp-blue);opacity:.07;pointer-events:none;transform-origin:30% 100%;animation:ftp-sway 9s ease-in-out infinite alternate}
 @keyframes ftp-sway{from{transform:rotate(-2deg)}to{transform:rotate(3deg)}}
-.ftp-cover-tag{position:absolute;left:2px;top:-4px;height:clamp(26px,4.6vw,60px);width:auto}
+.ftp-cover-tag{display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:clamp(12px,1.4vw,15px);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ftp-blue);background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);padding:4px 14px;border-radius:99px;margin-bottom:12px}
+.ftp-cover-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(46px,9vw,108px);font-weight:900;letter-spacing:-.035em;line-height:.96;text-transform:uppercase;display:block;background:linear-gradient(135deg,#ffffff 20%,#93c5fd 65%,#3b82f6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 20px rgba(59,130,246,.35));margin:0}
+.ftp-root[data-theme="light"] .ftp-cover-title{background:linear-gradient(135deg,#0f172a 10%,#2563eb 85%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:none}
 .ftp-cover-mid{position:relative;display:grid;grid-template-columns:1.2fr 1fr;gap:20px 40px;align-items:end;margin-top:clamp(14px,2vw,24px)}
-.ftp-sub{position:relative;font-size:clamp(28px,4vw,56px);font-weight:500;line-height:1.15;letter-spacing:-.01em;color:var(--ftp-muted);white-space:normal;display:flex;flex-direction:column;gap:4px;max-width:100%}
+.ftp-sub{position:relative;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(28px,3.8vw,52px);font-weight:700;line-height:1.15;letter-spacing:-.025em;color:var(--ftp-muted);white-space:normal;display:flex;flex-direction:column;gap:4px;max-width:100%}
 .ftp-sub span,.ftp-sub b{display:block;white-space:normal;overflow-wrap:break-word}
-.ftp-sub b{font-weight:700;color:var(--ftp-blue)}
+.ftp-sub b{font-weight:900;background:linear-gradient(135deg,#93c5fd,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ftp-root[data-theme="light"] .ftp-sub b{background:linear-gradient(135deg,#1d4ed8,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .ftp-sub-sig{display:none}
 .ftp-pill{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 6px 0 18px;border-radius:12px;background:var(--ftp-blue);color:#fff;font-size:clamp(14px,1.6vw,18px);font-weight:600;letter-spacing:.04em;transition:all .3s ease}
 .ftp-root[data-theme="dark"] .ftp-pill{background:linear-gradient(135deg,rgba(59,130,246,.85),rgba(37,99,235,.7));backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);box-shadow:0 8px 24px -6px rgba(59,130,246,.5),inset 0 1px 0 rgba(255,255,255,.3)}
@@ -643,6 +552,7 @@ const FTP_CSS = `
 .ftp-stack .ftp-fbody{padding:clamp(20px,3vw,36px) clamp(20px,3.4vw,42px)}
 .ftp-root[data-theme="dark"] .ftp-stack .ftp-folder>.ftp-fbody{box-shadow:0 20px 45px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.2)}
 .ftp-talk{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.ftp-talk-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(30px,5vw,60px);font-weight:900;letter-spacing:-.03em;color:#ffffff;line-height:1}
 .ftp-talk .ftp-st{height:clamp(44px,8.4vw,108px);width:auto;max-width:100%}
 .ftp-talk p{max-width:320px;font-size:14px;color:var(--on2)}
 .ftp-mail{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 20px;min-width:0;overflow:hidden}
@@ -749,67 +659,6 @@ type Vars = React.CSSProperties & Record<`--${string}`, string | number>
 
 const useIsoLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
 
-/* ------------------------------------------------------------------ type */
-
-function StrokeText({
-  text,
-  weight = 8,
-  outline = 0,
-  tracking = 26,
-  ligatures = true,
-  color = "currentColor",
-  inner = "var(--ftp-sheet)",
-  delay = 0,
-  className,
-  label,
-  decorative,
-}: {
-  text: string
-  weight?: number
-  /** Width of the outline line, in glyph units. 0 draws a solid stroke. */
-  outline?: number
-  tracking?: number
-  ligatures?: boolean
-  color?: string
-  /** Fill colour of the hollow inside an outlined stroke. */
-  inner?: string
-  delay?: number
-  className?: string
-  label?: string
-  decorative?: boolean
-}) {
-  const L = React.useMemo(() => layoutText(text, tracking + weight * 0.6, ligatures), [text, tracking, weight, ligatures])
-  const p = weight / 2 + 2
-  const vbW = r1(L.width + p * 2)
-  const vbH = r1(124 + p * 2)
-  const layers = outline > 0 ? [{ c: color, w: weight }, { c: inner, w: Math.max(0.5, weight - outline * 2) }] : [{ c: color, w: weight }]
-  return (
-    <svg
-      className={"ftp-st" + (className ? " " + className : "")}
-      viewBox={r1(-p) + " " + r1(-12 - p) + " " + vbW + " " + vbH}
-      width={vbW}
-      height={vbH}
-      role={decorative ? undefined : "img"}
-      aria-label={decorative ? undefined : (label ?? text)}
-      aria-hidden={decorative ? true : undefined}
-      style={{ "--d": delay + "ms" } as Vars}
-    >
-      {layers.map((layer, li) => (
-        <g key={li} fill="none" stroke={layer.c} strokeWidth={layer.w} strokeLinecap="round" strokeLinejoin="round">
-          {L.items.map((g, i) => (
-            <g key={i} transform={"translate(" + r1(g.x) + " 0)"}>
-              <g className="ftp-gl" style={{ "--i": i } as Vars}>
-                {splitSubpaths(g.d).map((sp, j) => (
-                  <path key={j} d={sp} pathLength={1} className="ftp-draw" />
-                ))}
-              </g>
-            </g>
-          ))}
-        </g>
-      ))}
-    </svg>
-  )
-}
 
 
 /* ---------------------------------------------------------------- folder */
@@ -1362,8 +1211,8 @@ export default function FolderTabPortfolioTemplate({
   email = "athulsunilkumar6@gmail.com",
   contacts = DEFAULT_CONTACTS,
   timeZone = "Asia/Kolkata",
+  location = "Kochi",
   colors,
-  ligatures = true,
   defaultTheme = "system",
   onThemeChange,
   height = "100svh",
@@ -1624,10 +1473,10 @@ export default function FolderTabPortfolioTemplate({
     <div className="ftp-head">
       <span className="ftp-plus" style={{ left: -18, top: -6 }} />
       <span className="ftp-plus" style={{ right: -18, top: -6 }} />
-      <StrokeText text={tagText} className="ftp-head-tag" weight={9} outline={1.6} color="var(--ftp-faint)" decorative />
+      <span className="ftp-head-tag">{tagText}</span>
       <div className="ftp-head-row">
-        <h2 id={uid + "-" + id + "-h"} style={{ minWidth: 0, flex: "1 1 auto" }}>
-          <StrokeText text={wordText} className="ftp-head-word" weight={10} outline={2.2} color="var(--ftp-blue)" ligatures={ligatures} />
+        <h2 id={uid + "-" + id + "-h"} className="ftp-head-title" style={{ minWidth: 0, flex: "1 1 auto" }}>
+          {wordText}
         </h2>
         {opts.local && <span className="ftp-head-local">{opts.local}</span>}
       </div>
@@ -1673,7 +1522,7 @@ export default function FolderTabPortfolioTemplate({
         <div className="ftp-mast-strip" />
         <div className="ftp-mast-row">
           <div className="ftp-mast-tab">
-            <StrokeText text={word} weight={17} tracking={20} color="#ffffff" ligatures={ligatures} label={word + ", " + name} />
+            <span className="ftp-mast-word">{word}</span>
             <span className="ftp-reg" aria-hidden="true">®</span>
           </div>
           <div className="ftp-mast-notes">
@@ -1749,9 +1598,9 @@ export default function FolderTabPortfolioTemplate({
             <Palm className="ftp-palm" />
             <span className="ftp-plus" style={{ left: -14, top: 8 }} />
             <span className="ftp-plus" style={{ right: -14, top: 8 }} />
-            <StrokeText text={tag} className="ftp-cover-tag" weight={8} outline={1.4} color="var(--ftp-muted)" decorative />
+            <span className="ftp-cover-tag">{tag}</span>
             <h1 id={uid + "-cover-h"} style={{ position: "relative" }}>
-              <StrokeText text={word} className="ftp-cover-word" weight={9} outline={1.9} tracking={22} color="var(--ftp-blue)" ligatures={ligatures} delay={150} label={word + " — " + name} />
+              <span className="ftp-cover-title">{word}</span>
             </h1>
           </div>
           <div className="ftp-cover-mid">
@@ -1886,7 +1735,7 @@ export default function FolderTabPortfolioTemplate({
                 </div>
                 <div className="ftp-photo-glass" style={{ color: "var(--ftp-blue)" }}>
                   <PalmIcon size={28} />
-                  <StrokeText text={years.split(/[–-]/).pop() || years} weight={9} color="var(--ftp-ink)" decorative />
+                  <span className="ftp-photo-year" style={{ color: "var(--ftp-ink)" }}>{years.split(/[–-]/).pop() || years}</span>
                 </div>
               </Folder>
             </div>
@@ -2106,7 +1955,7 @@ export default function FolderTabPortfolioTemplate({
           <div className="ftp-stack">
             <Folder tone="blue" glass tabAt={0.78} tab={<>Reflections <Arrow size={12} /></>}>
               <div className="ftp-talk">
-                <StrokeText text="Let's build :)" weight={15} tracking={22} color="#ffffff" label="Let's build" />
+                <span className="ftp-talk-title">Let's build :)</span>
                 <p>Open to software engineering roles, high-concurrency architecture challenges, and frontier AI systems. Inquiries, discussions, and coffee chats are always welcome.</p>
               </div>
             </Folder>
@@ -2154,7 +2003,7 @@ export default function FolderTabPortfolioTemplate({
           {clock && (
             <span className="ftp-clock">
               <i data-day={clock.day ? "true" : "false"} />
-              {clock.time} · {timeZone.split("/").pop()?.replace(/_/g, " ")}
+              {clock.time} · {location || (timeZone.split("/").pop()?.replace(/_/g, " ") === "Kolkata" ? "Kochi" : timeZone.split("/").pop()?.replace(/_/g, " "))}
             </span>
           )}
           <button type="button" className="ftp-top" onClick={() => goTo("cover")}>

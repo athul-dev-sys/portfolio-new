@@ -22,6 +22,7 @@ export default function App() {
       greeting="Hello, I'm"
       defaultTheme="dark"
       timeZone="Asia/Kolkata"
+      location="Kochi"
       email="athulsunilkumar6@gmail.com"
       photo={athulPhoto}
       colors={{
